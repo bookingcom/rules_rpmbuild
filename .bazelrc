@@ -1,0 +1,10 @@
+build --bes_results_url=https://bookingcom-opensource.buildbuddy.io/invocation/
+build --bes_backend=grpcs://bookingcom-opensource.buildbuddy.io
+build --remote_cache=grpcs://bookingcom-opensource.buildbuddy.io
+build --remote_timeout=3600
+
+#build --remote_executor=grpcs://remote.buildbuddy.io
+
+build --incompatible_strict_action_env
+
+try-import %workspace%/.bazelrc.user

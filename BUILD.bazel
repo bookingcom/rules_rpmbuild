@@ -1,0 +1,4 @@
+load("@gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/bookingcom/rules_rpmbuild
+gazelle(name = "gazelle")

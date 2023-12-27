@@ -1,0 +1,136 @@
+From 52a81eec77c5044d0611f7cbf7d5f127f32680da Mon Sep 17 00:00:00 2001
+From: Manuel Naranjo <manuel.naranjo@booking.com>
+Date: Wed, 27 Dec 2023 09:58:52 +0100
+Subject: [PATCH] bazel: adding bzlmod support
+
+Adding bzlmod based support, this lets bazel build the binary which
+is enough to get a go_binary available and known to bazel so we can
+use it for other things like rules_rpmbuild
+---
+ .bazelrc                   |  9 +++++++++
+ .bazelversion              |  1 +
+ .gitignore                 |  4 +++-
+ BUILD.bazel                | 18 ++++++++++++++++++
+ MODULE.bazel               | 10 ++++++++++
+ cmd/nsfakeroot/BUILD.bazel | 18 ++++++++++++++++++
+ loginshell/BUILD.bazel     |  8 ++++++++
+ 7 files changed, 67 insertions(+), 1 deletion(-)
+ create mode 100644 .bazelrc
+ create mode 100644 .bazelversion
+ create mode 100644 BUILD.bazel
+ create mode 100644 MODULE.bazel
+ create mode 100644 cmd/nsfakeroot/BUILD.bazel
+ create mode 100644 loginshell/BUILD.bazel
+
+diff --git a/.bazelrc b/.bazelrc
+new file mode 100644
+index 0000000..ea56e4a
+--- /dev/null
++++ b/.bazelrc
+@@ -0,0 +1,9 @@
++build --bes_results_url=https://app.buildbuddy.io/invocation/
++build --bes_backend=grpcs://remote.buildbuddy.io
++build --remote_cache=grpcs://remote.buildbuddy.io
++build --remote_timeout=60
++# build --remote_executor=grpcs://remote.buildbuddy.io
++build --remote_cache_compression
++
++try-import %workspace%/.bazelrc.user
++
+diff --git a/.bazelversion b/.bazelversion
+new file mode 100644
+index 0000000..66ce77b
+--- /dev/null
++++ b/.bazelversion
+@@ -0,0 +1 @@
++7.0.0
+diff --git a/.gitignore b/.gitignore
+index 94af30f..4835ba2 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1 +1,3 @@
+-/nsfakeroot
++/nsfakeroot
++bazel-*
++.bazelrc.user
+diff --git a/BUILD.bazel b/BUILD.bazel
+new file mode 100644
+index 0000000..5022ecc
+--- /dev/null
++++ b/BUILD.bazel
+@@ -0,0 +1,18 @@
++load("@gazelle//:def.bzl", "gazelle")
++load("@rules_go//go:def.bzl", "go_library", "go_test")
++
++# gazelle:prefix lure.sh/fakeroot
++gazelle(name = "gazelle")
++
++go_library(
++    name = "fakeroot",
++    srcs = ["fakeroot.go"],
++    importpath = "lure.sh/fakeroot",
++    visibility = ["//visibility:public"],
++)
++
++go_test(
++    name = "fakeroot_test",
++    srcs = ["fakeroot_test.go"],
++    deps = [":fakeroot"],
++)
+diff --git a/MODULE.bazel b/MODULE.bazel
+new file mode 100644
+index 0000000..094b6a8
+--- /dev/null
++++ b/MODULE.bazel
+@@ -0,0 +1,10 @@
++module(
++    name = "fakeroot",
++    version = "0.0.1",
++)
++
++bazel_dep(name = "rules_go", version = "0.44.0")
++bazel_dep(name = "gazelle", version = "0.35.0")
++
++go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
++go_deps.from_file(go_mod = "//:go.mod")
+diff --git a/cmd/nsfakeroot/BUILD.bazel b/cmd/nsfakeroot/BUILD.bazel
+new file mode 100644
+index 0000000..15401da
+--- /dev/null
++++ b/cmd/nsfakeroot/BUILD.bazel
+@@ -0,0 +1,18 @@
++load("@rules_go//go:def.bzl", "go_binary", "go_library")
++
++go_library(
++    name = "nsfakeroot_lib",
++    srcs = ["fakeroot.go"],
++    importpath = "lure.sh/fakeroot/cmd/nsfakeroot",
++    visibility = ["//visibility:private"],
++    deps = [
++        "//:fakeroot",
++        "//loginshell",
++    ],
++)
++
++go_binary(
++    name = "nsfakeroot",
++    embed = [":nsfakeroot_lib"],
++    visibility = ["//visibility:public"],
++)
+diff --git a/loginshell/BUILD.bazel b/loginshell/BUILD.bazel
+new file mode 100644
+index 0000000..77e5214
+--- /dev/null
++++ b/loginshell/BUILD.bazel
+@@ -0,0 +1,8 @@
++load("@rules_go//go:def.bzl", "go_library")
++
++go_library(
++    name = "loginshell",
++    srcs = ["loginshell.go"],
++    importpath = "lure.sh/fakeroot/loginshell",
++    visibility = ["//visibility:public"],
++)
+-- 
+2.34.1
+
