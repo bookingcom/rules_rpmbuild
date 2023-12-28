@@ -3,7 +3,7 @@ module github.com/bookingcom/rules_rpmbuild
 go 1.21.1
 
 require (
-	github.com/bazelbuild/buildtools v0.0.0-20230127124510-cf446296fb76
+	github.com/bazelbuild/buildtools v0.0.0-20231115204819-d4c9dccdfbb1
 	github.com/crillab/gophersat v1.3.1
 	github.com/onsi/gomega v1.26.0
 	github.com/sassoftware/go-rpmutils v0.2.0

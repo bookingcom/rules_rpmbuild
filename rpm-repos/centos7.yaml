@@ -1,0 +1,8 @@
+repositories:
+- arch: x86_64
+  baseurl: https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64
+  name: centos7.9.2009-x86_64-os-repo
+- arch: x86_64
+  baseurl: https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/
+  name: centos7.9.2009-x86_64-updates-repo
+

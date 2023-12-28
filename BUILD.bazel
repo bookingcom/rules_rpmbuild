@@ -1,3 +1,4 @@
+load("@bazeldnf//:def.bzl", "bazeldnf")
 load("@buildifier_prebuilt//:rules.bzl", "buildifier")
 load("@gazelle//:def.bzl", "gazelle")
 
@@ -10,4 +11,9 @@ buildifier(
         "./.git/*",
     ],
     mode = "fix",
+)
+
+bazeldnf(
+    name = "bazeldnf",
+    use_prebuilt = False,
 )

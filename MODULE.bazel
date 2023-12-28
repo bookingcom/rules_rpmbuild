@@ -11,11 +11,11 @@ bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0", dev_dependenc
 
 bazel_dep(name = "bazeldnf", version = "0.6.0")
 
-BAZELDNF_COMMIT = "ae720e2dad7ac4224e0861c18f0b86e92e7eaa33"
+BAZELDNF_COMMIT = "80a6103bfc4fc8fb59c35d95531471ebf1d29e00"
 
 archive_override(
     module_name = "bazeldnf",
-    integrity = "sha256-KwnYgEuJtMdiUHfjeGB5D/jcqDS4rwbX3QJHoBpiXlc=",
+    integrity = "sha256-kHxLgzDgWYkm68qOqS4vnFDsv5XtFz0sHo4x36nIckM=",
     strip_prefix = "bazeldnf-%s" % BAZELDNF_COMMIT,
     urls = [
         "https://github.com/bookingcom/bazeldnf/archive/%s.tar.gz" % BAZELDNF_COMMIT,
@@ -66,3 +66,13 @@ archive_override(
 )
 
 bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True)
+
+rpm_deps = use_extension("@bazeldnf//:extensions.bzl", "rpm_deps")
+rpm_deps.lock_file(
+    generated_visibility = [
+        "//visibility:public",
+    ],
+    path = "rpmtree/centos7/rpm.json",
+    rpm_tree_name = "centos7-rpm",
+)
+use_repo(rpm_deps, "centos7-rpm")
