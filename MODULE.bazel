@@ -51,3 +51,14 @@ use_repo(
     "io_k8s_sigs_yaml",
     "org_golang_x_crypto",
 )
+
+FAKECHROOT_COMMIT = "f4d5fd801749b25b0ca8a696cb4d41c99ea11aa5"
+bazel_dep(name = "fakechroot", version = "2.20.1")
+archive_override(
+    module_name = "fakechroot",
+    integrity = "sha256-uI0N6Vav6L2QH1avKJbBoRkXNXpE1TfcO5FU5zXE87c=",
+    strip_prefix = "bazel-fakechroot-%s" % FAKECHROOT_COMMIT,
+    urls = [
+        "https://github.com/bookingcom/bazel-fakechroot/archive/%s.tar.gz" % FAKECHROOT_COMMIT
+    ]
+)
