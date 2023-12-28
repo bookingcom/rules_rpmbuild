@@ -5,8 +5,10 @@ module(
 
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
 bazel_dep(name = "rules_go", version = "0.44.0")
-bazel_dep(name = "gazelle", version = "0.35.0")
-bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0")
+
+bazel_dep(name = "gazelle", version = "0.35.0", dev_dependency = True)
+bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0", dev_dependency = True)
+
 bazel_dep(name = "bazeldnf", version = "0.6.0")
 
 BAZELDNF_COMMIT = "ae720e2dad7ac4224e0861c18f0b86e92e7eaa33"
@@ -39,7 +41,6 @@ archive_override(
 
 go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
 go_deps.from_file(go_mod = "//:go.mod")
-
 use_repo(
     go_deps,
     "com_github_bazelbuild_buildtools",
@@ -53,12 +54,15 @@ use_repo(
 )
 
 FAKECHROOT_COMMIT = "f4d5fd801749b25b0ca8a696cb4d41c99ea11aa5"
+
 bazel_dep(name = "fakechroot", version = "2.20.1")
 archive_override(
     module_name = "fakechroot",
     integrity = "sha256-uI0N6Vav6L2QH1avKJbBoRkXNXpE1TfcO5FU5zXE87c=",
     strip_prefix = "bazel-fakechroot-%s" % FAKECHROOT_COMMIT,
     urls = [
-        "https://github.com/bookingcom/bazel-fakechroot/archive/%s.tar.gz" % FAKECHROOT_COMMIT
-    ]
+        "https://github.com/bookingcom/bazel-fakechroot/archive/%s.tar.gz" % FAKECHROOT_COMMIT,
+    ],
 )
+
+bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True)
