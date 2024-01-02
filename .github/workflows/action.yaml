@@ -1,0 +1,20 @@
+name: "build and test"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: bazelbuild/setup-bazelisk@v1
+    - run:
+        set -x &&
+        echo "build --remote_header=x-buildbuddy-api-key=${{secrets.BUILDBUDDY_TOKEN}}" >> .bazelrc.user &&
+        bazel build //... &&
+        bazel test //...
