@@ -11,6 +11,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	golang.org/x/crypto v0.0.0-20221012134737-56aed061732a
 	sigs.k8s.io/yaml v1.3.0
+	golang.org/x/sys v0.15.0
 )
 
 require (
@@ -21,7 +22,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/net v0.5.0 // indirect
-	golang.org/x/sys v0.4.0 // indirect
 	golang.org/x/text v0.6.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

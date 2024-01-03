@@ -1,17 +1,19 @@
 {
-    "name": "centos7-rpm",
-    "base-system": "centos-release",
+    "name": "centos7-yum-with-no-filesystem",
+    "base-system": "filesystem",
     "build-file": "rpm/BUILD.bazel",
     "repo-files": [
         "rpm-repos/centos7.yaml"
     ],
     "arch": "x86_64",
     "required": [
-        "rpm"
+        "yum"
     ],
     "version": 2,
     "force-ignore-with-dependencies": [
-        "filesystem"
+        "centos-release",
+        "filesystem",
+        "setup"
     ],
     "rpms": [
         {
@@ -50,13 +52,6 @@
             ]
         },
         {
-            "name": "centos-release-0__7-9.2009.1.el7.centos.x86_64",
-            "sha256": "b1b4503ca199a88ac8a81a7fa75f6487ef746fd58e4bf8d079e879b4ad3596cb",
-            "urls": [
-                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/centos-release-7-9.2009.1.el7.centos.x86_64.rpm"
-            ]
-        },
-        {
             "name": "chkconfig-0__1.7.6-1.el7.x86_64",
             "sha256": "646df8aeff8fdbd206070c2cd91bdb50003035c9925d0605c52a80cc081c38dc",
             "urls": [
@@ -68,6 +63,13 @@
             "sha256": "f3f69f58e04b244b740beae57319f782363f8a8bfaacea37bca6ed2cb7d1cd2e",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/coreutils-8.22-24.el7_9.2.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "cpio-0__2.11-28.el7.x86_64",
+            "sha256": "6599f0e8f5a77b382d921f9e0f5284330e65647384fb2a7b99c0afa855428e55",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/cpio-2.11-28.el7.x86_64.rpm"
             ]
         },
         {
@@ -85,10 +87,31 @@
             ]
         },
         {
+            "name": "diffutils-0__3.3-6.el7_9.x86_64",
+            "sha256": "3b822a517d29541cd78da3a94ca8b9ce8095283d799bf7d7ebe96461744ae90d",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/diffutils-3.3-6.el7_9.x86_64.rpm"
+            ]
+        },
+        {
             "name": "elfutils-libelf-0__0.176-5.el7.x86_64",
             "sha256": "948ce350950c8bcd16b25b90511a1aac73cb96d5ef6f0e2a1b28606f2ef6ff9f",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/elfutils-libelf-0.176-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "expat-0__2.1.0-15.el7_9.x86_64",
+            "sha256": "6cc655263da0213df7eb5a2c6c63b5825361f55336855a67a7b33881d10ca955",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/expat-2.1.0-15.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "file-libs-0__5.11-37.el7.x86_64",
+            "sha256": "6dee716f3bb1e7ca518efc1d3c4fcda3ef819312d50f709ecd11a301db86380f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/file-libs-5.11-37.el7.x86_64.rpm"
             ]
         },
         {
@@ -103,6 +126,20 @@
             "sha256": "3aedd340b676e49fe6d25b04a77402d074b2a13f2607e165d6ec94c51a5ced12",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gawk-4.0.2-4.el7_3.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gdbm-0__1.10-8.el7.x86_64",
+            "sha256": "65f28fdefa291bfe53e9c8646ce0f7510f312a4fee232af36e3d4fe678b60591",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gdbm-1.10-8.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "glib2-0__2.56.1-9.el7_9.x86_64",
+            "sha256": "8509fe4641cb16b24f3aced3e8cb56ef28648055b03221b4d4cb4017259e1995",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/glib2-2.56.1-9.el7_9.x86_64.rpm"
             ]
         },
         {
@@ -124,6 +161,20 @@
             "sha256": "74f4e6d4e47a6ce9304a5c2d6cb6e69d56aec5cdd8cac87fad0338ac73e7adaa",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gmp-6.0.0-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gnupg2-0__2.0.22-5.el7_5.x86_64",
+            "sha256": "4d58715b4fb8e1a09e0f18ec69e93edc6e4b0558639d37421e8a7c5bd48ad344",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gnupg2-2.0.22-5.el7_5.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gpgme-0__1.3.2-5.el7.x86_64",
+            "sha256": "9148ef5927982bf19fe3a065b5c4b70a83734036c0a4ea6187589a0530a58d76",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gpgme-1.3.2-5.el7.x86_64.rpm"
             ]
         },
         {
@@ -162,10 +213,24 @@
             ]
         },
         {
+            "name": "libassuan-0__2.1.0-3.el7.x86_64",
+            "sha256": "86c7cc7269d343c8c9c667f66d1d5ed41f0316818719111f31724df9de7d347f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libassuan-2.1.0-3.el7.x86_64.rpm"
+            ]
+        },
+        {
             "name": "libattr-0__2.4.46-13.el7.x86_64",
             "sha256": "3939632d06fe2120e5361ea76609528a27bcca2ee7346c9294e0a5ea91c8ef30",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libattr-2.4.46-13.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libblkid-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "0eda90367bc11ce10165853be705e1303b3ac2a0f5072131cbd8b2ea6ed2d1ea",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libblkid-2.23.2-65.el7_9.1.x86_64.rpm"
             ]
         },
         {
@@ -225,10 +290,31 @@
             ]
         },
         {
+            "name": "libgcrypt-0__1.5.3-14.el7.x86_64",
+            "sha256": "ff9ec05458a8fc562100f41d8e20b438c7a897dd0b80a2d39e85b5a30ac58a6a",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libgcrypt-1.5.3-14.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libgpg-error-0__1.12-3.el7.x86_64",
+            "sha256": "3cdbe510adeb1a2597eb2c81fff2ddef2319c8da70bd4a36efeedb491be5bd33",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libgpg-error-1.12-3.el7.x86_64.rpm"
+            ]
+        },
+        {
             "name": "libidn-0__1.28-4.el7.x86_64",
             "sha256": "1c73d48fdb8362d9a8b988daf8b40079b30f25677646edbd86259c0fd9a413e4",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libidn-1.28-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libmount-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "74ba5dbc31e8d072aad83ccc34e693990c0625ce81a367690bc1cc6bbdbdc121",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libmount-2.23.2-65.el7_9.1.x86_64.rpm"
             ]
         },
         {
@@ -267,10 +353,24 @@
             ]
         },
         {
+            "name": "libuuid-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "f530a65c0efca53f618f63e02801129283b12266fbf21ac221e35617a45b0d4b",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libuuid-2.23.2-65.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
             "name": "libverto-0__0.2.5-4.el7.x86_64",
             "sha256": "e8485822ec59dbb056057ae28872f673574fe70162aed18bb315fcbb8819d8cd",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libverto-0.2.5-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libxml2-0__2.9.1-6.el7_9.6.x86_64",
+            "sha256": "ffdb0e908ca8cc9013d59da38b6a5d9d04ea15e6af25a38508bc92e04af68500",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libxml2-2.9.1-6.el7_9.6.x86_64.rpm"
             ]
         },
         {
@@ -393,10 +493,80 @@
             ]
         },
         {
+            "name": "pinentry-0__0.8.1-17.el7.x86_64",
+            "sha256": "5daa28bbe26b27fb6b2281e04e6f4d16327cd0bd79cb01c79ec137a833a10fd0",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pinentry-0.8.1-17.el7.x86_64.rpm"
+            ]
+        },
+        {
             "name": "popt-0__1.13-16.el7.x86_64",
             "sha256": "1622216de88b06bde92cfc8eee1dd0f0a1d8368a1036cdb2d45b6ed9e382b36b",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/popt-1.13-16.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pth-0__2.0.7-23.el7.x86_64",
+            "sha256": "4b26fdbdd7a3a653b1bce3ee3ff498c907159d1f872ce35705f32475ef196499",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pth-2.0.7-23.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pygpgme-0__0.3-9.el7.x86_64",
+            "sha256": "1689e8465778f1ec1101a45bfb4837c82c17cd05ea7f5702790ce404dd3f526c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pygpgme-0.3-9.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pyliblzma-0__0.5.3-11.el7.x86_64",
+            "sha256": "dc5bfb63e98c57b8c06a979e45c04acb4761a61688d321b5bcf4854ed29ea6b6",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pyliblzma-0.5.3-11.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "python-0__2.7.5-94.el7_9.x86_64",
+            "sha256": "a9b4ea25e0a41a0300195b07a478887cdc00b3c879db84a0cf5c31832d626194",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/python-2.7.5-94.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "python-iniparse-0__0.4-9.el7.x86_64",
+            "sha256": "bfaeaefbcbc7e552658804f3b101506cde9d3b27d8c601d629bd0d42f00d240a",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/python-iniparse-0.4-9.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "python-libs-0__2.7.5-94.el7_9.x86_64",
+            "sha256": "c8476e1d935321320f812a72c05a7442201d6f34050996100637f18917d65923",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/python-libs-2.7.5-94.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "python-pycurl-0__7.19.0-19.el7.x86_64",
+            "sha256": "98cb6d39b70ef9b42488cd519b11962c56af8b6e8e993d5e4dfd145c35e5eea8",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/python-pycurl-7.19.0-19.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "python-urlgrabber-0__3.10-10.el7.x86_64",
+            "sha256": "1a9208c12e40222cbad399b49e8bc727178112b7bd35420ebd42d699ccac5050",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/python-urlgrabber-3.10-10.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "pyxattr-0__0.5.1-5.el7.x86_64",
+            "sha256": "29302258ab221b39aa46cac16429e0f66a736672b01690f15243aaa7b75459e9",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pyxattr-0.5.1-5.el7.x86_64.rpm"
             ]
         },
         {
@@ -414,10 +584,24 @@
             ]
         },
         {
+            "name": "rpm-build-libs-0__4.11.3-48.el7_9.x86_64",
+            "sha256": "d850176c0a4cdf0424b72ae4e068e7464ebcaba44a41850c646e0e7b0e8b2ac7",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/rpm-build-libs-4.11.3-48.el7_9.x86_64.rpm"
+            ]
+        },
+        {
             "name": "rpm-libs-0__4.11.3-48.el7_9.x86_64",
             "sha256": "9d9440a2b4ed4979c7741c8ff246d32dd982cf24ff59fb679bee4516ab71f0d1",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/rpm-libs-4.11.3-48.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "rpm-python-0__4.11.3-48.el7_9.x86_64",
+            "sha256": "05cd5d302b4787e4b7f4d091ae0e2cfc78a0ad48883502cb3bc7ec1cf2c8601a",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/rpm-python-4.11.3-48.el7_9.x86_64.rpm"
             ]
         },
         {
@@ -428,10 +612,10 @@
             ]
         },
         {
-            "name": "setup-0__2.8.71-11.el7.x86_64",
-            "sha256": "43028ba601af4be8f3b3eb2b125fb46777a8a4b869ec829d4b7f92202b4957c5",
+            "name": "shared-mime-info-0__1.8-5.el7.x86_64",
+            "sha256": "0aa76ca3cfed11160209645030d76f1dd23941132112df7d25799e4d7519f457",
             "urls": [
-                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/setup-2.8.71-11.el7.noarch.rpm"
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/shared-mime-info-1.8-5.el7.x86_64.rpm"
             ]
         },
         {
@@ -453,6 +637,27 @@
             "sha256": "4b698de5fd7e0a64306106f3018e9d00dedc1f7a46d354339f012c97d004bd0c",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/xz-libs-5.2.2-2.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "yum-0__3.4.3-168.el7.centos.x86_64",
+            "sha256": "4e4dfb98b84eaac13cb158053d8cdb1a0d37f881ce5773ab9b1d5123364ebed5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/yum-3.4.3-168.el7.centos.noarch.rpm"
+            ]
+        },
+        {
+            "name": "yum-metadata-parser-0__1.1.4-10.el7.x86_64",
+            "sha256": "1ea334b2fb96566c82581b21ba601a310916d92c4220be73a39d654b8cb5fb59",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "yum-plugin-fastestmirror-0__1.1.31-54.el7_8.x86_64",
+            "sha256": "0cbfb3a15b677700b41e4d2aa4f3bd1df13ec1211808bd60407b0770c5577737",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch.rpm"
             ]
         },
         {

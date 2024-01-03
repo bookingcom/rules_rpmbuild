@@ -1,0 +1,10 @@
+load("@centos7-filesystem//:rpms.bzl", _filesystem = "RPMS")
+load("@centos7-rpm//:rpms.bzl", "RPMS")
+load("//:bootstrap.bzl", "bootstrap")
+
+bootstrap(
+    name = "bootstrap",
+    filesystem = _filesystem,
+    rpm_rpmtree = "@centos7-yum-with-no-filesystem//:rpms",
+    rpms = RPMS,
+)

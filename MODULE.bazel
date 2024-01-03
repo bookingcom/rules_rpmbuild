@@ -10,6 +10,7 @@ bazel_dep(name = "gazelle", version = "0.35.0", dev_dependency = True)
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0", dev_dependency = True)
 
 bazel_dep(name = "bazeldnf", version = "0.6.0")
+bazel_dep(name = "aspect_bazel_lib", version = "2.1.0")
 
 BAZELDNF_COMMIT = "80a6103bfc4fc8fb59c35d95531471ebf1d29e00"
 
@@ -53,18 +54,6 @@ use_repo(
     "org_golang_x_crypto",
 )
 
-FAKECHROOT_COMMIT = "f4d5fd801749b25b0ca8a696cb4d41c99ea11aa5"
-
-bazel_dep(name = "fakechroot", version = "2.20.1")
-archive_override(
-    module_name = "fakechroot",
-    integrity = "sha256-uI0N6Vav6L2QH1avKJbBoRkXNXpE1TfcO5FU5zXE87c=",
-    strip_prefix = "bazel-fakechroot-%s" % FAKECHROOT_COMMIT,
-    urls = [
-        "https://github.com/bookingcom/bazel-fakechroot/archive/%s.tar.gz" % FAKECHROOT_COMMIT,
-    ],
-)
-
 bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True)
 
 rpm_deps = use_extension("@bazeldnf//:extensions.bzl", "rpm_deps")
@@ -72,7 +61,29 @@ rpm_deps.lock_file(
     generated_visibility = [
         "//visibility:public",
     ],
+    path = "rpmtree/centos7/filesystem.json",
+    rpm_tree_name = "centos7-filesystem",
+)
+rpm_deps.lock_file(
     path = "rpmtree/centos7/rpm.json",
     rpm_tree_name = "centos7-rpm",
 )
-use_repo(rpm_deps, "centos7-rpm")
+rpm_deps.lock_file(
+    path = "rpmtree/centos7/yum-with-no-filesystem.json",
+    rpm_tree_name = "centos7-yum-with-no-filesystem",
+)
+use_repo(rpm_deps, "centos7-filesystem", "centos7-rpm", "centos7-yum-with-no-filesystem")
+
+# this comes from aspect_bazel_lib MODULE.bazel
+bazel_lib_toolchains = use_extension("@aspect_bazel_lib//lib:extensions.bzl", "toolchains")
+bazel_lib_toolchains.tar()
+use_repo(bazel_lib_toolchains, "bsd_tar_toolchains")
+
+register_toolchains(
+    # Expand bsd_tar_toolchains
+    "@bsd_tar_toolchains//:linux_amd64_toolchain",
+    "@bsd_tar_toolchains//:linux_arm64_toolchain",
+    "@bsd_tar_toolchains//:windows_amd64_toolchain",
+    # host toolchain must be last, as it's only suitable as a fallback on macos
+    "@bsd_tar_toolchains//:host_toolchain",
+)
