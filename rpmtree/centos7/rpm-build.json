@@ -1,0 +1,1131 @@
+{
+    "name": "centos7-rpm-build",
+    "base-system": "centos-release",
+    "build-file": "rpm/BUILD.bazel",
+    "repo-files": [
+        "rpm-repos/centos7.yaml"
+    ],
+    "arch": "x86_64",
+    "required": [
+        "rpm-build"
+    ],
+    "version": 2,
+    "force-ignore-with-dependencies": [
+        "filesystem"
+    ],
+    "rpms": [
+        {
+            "name": "acl-0__2.2.51-15.el7.x86_64",
+            "sha256": "2baf59aae30da68fd97c7c100c58395c0bf55223ae4314dc24750f6ba6eecda3",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/acl-2.2.51-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "audit-libs-0__2.8.5-4.el7.x86_64",
+            "sha256": "8531bf49043f146e7460e4f2bb898a7fa2ff1a07c70b9834d9cac60a3e3c57ed",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/audit-libs-2.8.5-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "basesystem-0__10.0-7.el7.centos.x86_64",
+            "sha256": "0280ee16df09be0cebf62695706598caed8ff5cba47de1fed625068a90a9ef68",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/basesystem-10.0-7.el7.centos.noarch.rpm"
+            ]
+        },
+        {
+            "name": "bash-0__4.2.46-35.el7_9.x86_64",
+            "sha256": "5c57f76aba32a986317ac294945a789bd49f7cd09491d4a66c8c259b336a13db",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/bash-4.2.46-35.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "binutils-0__2.27-44.base.el7_9.1.x86_64",
+            "sha256": "db4dac1347f0a7c37ce54b990ae4be455c6c016e54d0a315f1e2cbefcefd3073",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/binutils-2.27-44.base.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "bzip2-0__1.0.6-13.el7.x86_64",
+            "sha256": "f41905c9256924601a0ac53afc9a8a22f53f67c6b0faf43ae86c0bce12c9f9d8",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/bzip2-1.0.6-13.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "bzip2-libs-0__1.0.6-13.el7.x86_64",
+            "sha256": "1fd32866a2a82f5abc19142b59dce8fd961bc1d32e3bedfa0de7a950066fdaa5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/bzip2-libs-1.0.6-13.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "ca-certificates-0__2023.2.60_v7.0.306-72.el7_9.x86_64",
+            "sha256": "e3a24b7d3f533aea4ed0f3d9388b2f7d72febbb435d58e7be4020cdbc47107e6",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/ca-certificates-2023.2.60_v7.0.306-72.el7_9.noarch.rpm"
+            ]
+        },
+        {
+            "name": "centos-release-0__7-9.2009.1.el7.centos.x86_64",
+            "sha256": "b1b4503ca199a88ac8a81a7fa75f6487ef746fd58e4bf8d079e879b4ad3596cb",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/centos-release-7-9.2009.1.el7.centos.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "chkconfig-0__1.7.6-1.el7.x86_64",
+            "sha256": "646df8aeff8fdbd206070c2cd91bdb50003035c9925d0605c52a80cc081c38dc",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/chkconfig-1.7.6-1.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "coreutils-0__8.22-24.el7_9.2.x86_64",
+            "sha256": "f3f69f58e04b244b740beae57319f782363f8a8bfaacea37bca6ed2cb7d1cd2e",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/coreutils-8.22-24.el7_9.2.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "cpio-0__2.11-28.el7.x86_64",
+            "sha256": "6599f0e8f5a77b382d921f9e0f5284330e65647384fb2a7b99c0afa855428e55",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/cpio-2.11-28.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "cracklib-0__2.9.0-11.el7.x86_64",
+            "sha256": "7c5e02fdfe2c2d5beb786a4dfa2aff8ccd5d52dfb8fa5f655046fa7c9d0bd923",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/cracklib-2.9.0-11.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "cracklib-dicts-0__2.9.0-11.el7.x86_64",
+            "sha256": "39edb2d55f639a5602b4663dc66b61af3fe8e2365dd823101ecb8aeaf543cf06",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/cracklib-dicts-2.9.0-11.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "cryptsetup-libs-0__2.0.3-6.el7.x86_64",
+            "sha256": "3e66861c079f0947a0c167f41a4b179a3ced6323499fe70d6fd5aa8d31120efb",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/cryptsetup-libs-2.0.3-6.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "curl-0__7.29.0-59.el7_9.2.x86_64",
+            "sha256": "a979b1653b72f0551faf8fa54eed42be4d51511d962ed09d02ece63f2402d5f7",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/curl-7.29.0-59.el7_9.2.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "cyrus-sasl-lib-0__2.1.26-24.el7_9.x86_64",
+            "sha256": "e1d065bfaef705d407c6134352d1afc64ecf26a5970a0e5282f6dda745483db8",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/cyrus-sasl-lib-2.1.26-24.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "dbus-1__1.10.24-15.el7.x86_64",
+            "sha256": "99a677acf9d35be3213a00fc2d97e562498398f3e387f3c4bc73c3d4a614e4e2",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/dbus-1.10.24-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "dbus-libs-1__1.10.24-15.el7.x86_64",
+            "sha256": "1dd6ceb75ebf29acc52c889d4df58909419ce5b62ebabdc18d6869f3e3ba5e11",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/dbus-libs-1.10.24-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "device-mapper-7__1.02.170-6.el7_9.5.x86_64",
+            "sha256": "a18e979a837324a9730fc3e5b08e4f228f22d46c20c0a6445f7147444b8449c3",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/device-mapper-1.02.170-6.el7_9.5.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "device-mapper-libs-7__1.02.170-6.el7_9.5.x86_64",
+            "sha256": "a3db401db86968bf26b166686f43ca87a750990d0b9e46fad7c8f63e89052035",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/device-mapper-libs-1.02.170-6.el7_9.5.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "diffutils-0__3.3-6.el7_9.x86_64",
+            "sha256": "3b822a517d29541cd78da3a94ca8b9ce8095283d799bf7d7ebe96461744ae90d",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/diffutils-3.3-6.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "dracut-0__033-572.el7.x86_64",
+            "sha256": "d0a1b819ab0df1bf51e9d9997e9da58897180af2ed4b2ab92cb76d5e4712615b",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/dracut-033-572.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "dwz-0__0.11-3.el7.x86_64",
+            "sha256": "c94fd9bcbba7622bf91f96e65cb4da4faee6a03a3f467e9384b4954207d85c87",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/dwz-0.11-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "elfutils-0__0.176-5.el7.x86_64",
+            "sha256": "97f7d44cfc812a9e209e7bd2cc6a2a5d603f048ccc090938be5492f232575f7f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/elfutils-0.176-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "elfutils-default-yama-scope-0__0.176-5.el7.x86_64",
+            "sha256": "71459128c5ab2a33c0bfd33258304ee50fba3ba4c9f4f4a8a21ce007b352a95c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/elfutils-default-yama-scope-0.176-5.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "elfutils-libelf-0__0.176-5.el7.x86_64",
+            "sha256": "948ce350950c8bcd16b25b90511a1aac73cb96d5ef6f0e2a1b28606f2ef6ff9f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/elfutils-libelf-0.176-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "elfutils-libs-0__0.176-5.el7.x86_64",
+            "sha256": "fa5693e4fe8ae9d57eb44eb97327fa0767b6e8a4963ba2ee5337dc7487f74fff",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/elfutils-libs-0.176-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "expat-0__2.1.0-15.el7_9.x86_64",
+            "sha256": "6cc655263da0213df7eb5a2c6c63b5825361f55336855a67a7b33881d10ca955",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/expat-2.1.0-15.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "file-0__5.11-37.el7.x86_64",
+            "sha256": "382ae17150a63510e99fe28a0041eabb0f5e7a0b5456b9b2b8f463e7b99feac5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/file-5.11-37.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "file-libs-0__5.11-37.el7.x86_64",
+            "sha256": "6dee716f3bb1e7ca518efc1d3c4fcda3ef819312d50f709ecd11a301db86380f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/file-libs-5.11-37.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "findutils-1__4.5.11-6.el7.x86_64",
+            "sha256": "f3af811b9e932b3b01908dbe62313dae3663166a038753d3636757a5bb556538",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/findutils-4.5.11-6.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gawk-0__4.0.2-4.el7_3.1.x86_64",
+            "sha256": "3aedd340b676e49fe6d25b04a77402d074b2a13f2607e165d6ec94c51a5ced12",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gawk-4.0.2-4.el7_3.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gdb-0__7.6.1-120.el7.x86_64",
+            "sha256": "62521a534dd16d0e1e275870d423f1d09bf4c70b3375b875b60c83b7a42d34c7",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gdb-7.6.1-120.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gdbm-0__1.10-8.el7.x86_64",
+            "sha256": "65f28fdefa291bfe53e9c8646ce0f7510f312a4fee232af36e3d4fe678b60591",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gdbm-1.10-8.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "glib2-0__2.56.1-9.el7_9.x86_64",
+            "sha256": "8509fe4641cb16b24f3aced3e8cb56ef28648055b03221b4d4cb4017259e1995",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/glib2-2.56.1-9.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "glibc-0__2.17-326.el7_9.x86_64",
+            "sha256": "58dd6ecca9f9c38c402d46c56efacaf2a8739de21c64f22dfb3f9887f2de6c94",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/glibc-2.17-326.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "glibc-common-0__2.17-326.el7_9.x86_64",
+            "sha256": "aba75d84977de2cd5e9da00e763912c5e72ba28b55b17e081014e97ca13ce809",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/glibc-common-2.17-326.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gmp-1__6.0.0-15.el7.x86_64",
+            "sha256": "74f4e6d4e47a6ce9304a5c2d6cb6e69d56aec5cdd8cac87fad0338ac73e7adaa",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gmp-6.0.0-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gnupg2-0__2.0.22-5.el7_5.x86_64",
+            "sha256": "4d58715b4fb8e1a09e0f18ec69e93edc6e4b0558639d37421e8a7c5bd48ad344",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/gnupg2-2.0.22-5.el7_5.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "grep-0__2.20-3.el7.x86_64",
+            "sha256": "a7db6ef1a900854ac14cbb82896c289b4a7e97ab2204a7dbc3e83fb9757cf2e1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/grep-2.20-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "groff-base-0__1.22.2-8.el7.x86_64",
+            "sha256": "b74d29df8bbe8ccfdc162278cbd21e4d4139c49e484d66a8b06f86ce037882f4",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/groff-base-1.22.2-8.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gzip-0__1.5-11.el7_9.x86_64",
+            "sha256": "a38a894774d443bd314d09acaa9ee6056116e25f757c9e76290fe30450b9ca95",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/gzip-1.5-11.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "hardlink-1__1.0-19.el7.x86_64",
+            "sha256": "38ed932d9ac063f448a1961758bc7c3448a95655b8e279cd9830455bcab57540",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/hardlink-1.0-19.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "info-0__5.1-5.el7.x86_64",
+            "sha256": "df7c365f639b05423ff2023355a26c165344174fbe445a072a5c94ecacfe1bc1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/info-5.1-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "json-c-0__0.11-4.el7_0.x86_64",
+            "sha256": "5c92ec8a501573d6fa86b56b0f935de30c2a55e12df0cb201f2f007e80a99d38",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/json-c-0.11-4.el7_0.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "keyutils-libs-0__1.5.8-3.el7.x86_64",
+            "sha256": "16c7cb17dd4eced77c44697bc431c0ac9eb012da78fc91abacd828d3aa8e5dd3",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/keyutils-libs-1.5.8-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "kmod-0__20-28.el7.x86_64",
+            "sha256": "1e9502d12f0e8adfc652fbc038fccb9ccb92e4bf476d1b7d7b48c2569cd89a56",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/kmod-20-28.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "kmod-libs-0__20-28.el7.x86_64",
+            "sha256": "e7fd34c97b67902f6a81f9a6e9e38a9e0a1bc60253bac2fd315801b3e2365289",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/kmod-libs-20-28.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "kpartx-0__0.4.9-136.el7_9.x86_64",
+            "sha256": "14290884418bd83ad4955aa6354b2113950b766239244a06bee2f2a364ba608f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/kpartx-0.4.9-136.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "krb5-libs-0__1.15.1-55.el7_9.x86_64",
+            "sha256": "0b514834510f57ab09a2051d0b0c2be8a61777452ad125d1b3e5e90abeb6fa22",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/krb5-libs-1.15.1-55.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libacl-0__2.2.51-15.el7.x86_64",
+            "sha256": "70b1fa6ba98a007c89fdd965a098114e614669ecc8aa9ce341fa1c0368f24b28",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libacl-2.2.51-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libassuan-0__2.1.0-3.el7.x86_64",
+            "sha256": "86c7cc7269d343c8c9c667f66d1d5ed41f0316818719111f31724df9de7d347f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libassuan-2.1.0-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libattr-0__2.4.46-13.el7.x86_64",
+            "sha256": "3939632d06fe2120e5361ea76609528a27bcca2ee7346c9294e0a5ea91c8ef30",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libattr-2.4.46-13.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libblkid-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "0eda90367bc11ce10165853be705e1303b3ac2a0f5072131cbd8b2ea6ed2d1ea",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libblkid-2.23.2-65.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libcap-0__2.22-11.el7.x86_64",
+            "sha256": "a7ef59c5a4ea4f57b72ee2b300aa9da1647f2fc4d265010915442b9cb8511dce",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libcap-2.22-11.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libcap-ng-0__0.7.5-4.el7.x86_64",
+            "sha256": "0801fc61e4124a0295dada6850039edb515316cd55df176db1a3c8f26436825a",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libcap-ng-0.7.5-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libcom_err-0__1.42.9-19.el7.x86_64",
+            "sha256": "b98e19c3bbf6de458697a895654db0d75e93e7738ef22bc1540e2c78fa91748b",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libcom_err-1.42.9-19.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libcurl-0__7.29.0-59.el7_9.2.x86_64",
+            "sha256": "34e3369ca1560dc34b862cce4a9fb6a7939494ce15ee0f68fb76edaf5fb3ee53",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libcurl-7.29.0-59.el7_9.2.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libdb-0__5.3.21-25.el7.x86_64",
+            "sha256": "5075223da1560b21fe5cedcf1ea4e0a4f1ce484c47abf81677cd5a6a5c1ad181",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libdb-5.3.21-25.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libdb-utils-0__5.3.21-25.el7.x86_64",
+            "sha256": "0b1cbcb57ee034399d33ed4af8bb0e59f68750f9004c6f25a03ee801be497b28",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libdb-utils-5.3.21-25.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libffi-0__3.0.13-19.el7.x86_64",
+            "sha256": "670463ed744b7243cfe32f0c4aa6676657a6078a6e2009a51fdb7b907b98ef71",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libffi-3.0.13-19.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libgcc-0__4.8.5-44.el7.x86_64",
+            "sha256": "cb1967fba485ad3da345e33018c0e8b367359f251c6b1a8847a4976579d74ffa",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libgcc-4.8.5-44.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libgcrypt-0__1.5.3-14.el7.x86_64",
+            "sha256": "ff9ec05458a8fc562100f41d8e20b438c7a897dd0b80a2d39e85b5a30ac58a6a",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libgcrypt-1.5.3-14.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libgpg-error-0__1.12-3.el7.x86_64",
+            "sha256": "3cdbe510adeb1a2597eb2c81fff2ddef2319c8da70bd4a36efeedb491be5bd33",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libgpg-error-1.12-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libidn-0__1.28-4.el7.x86_64",
+            "sha256": "1c73d48fdb8362d9a8b988daf8b40079b30f25677646edbd86259c0fd9a413e4",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libidn-1.28-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libmount-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "74ba5dbc31e8d072aad83ccc34e693990c0625ce81a367690bc1cc6bbdbdc121",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libmount-2.23.2-65.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libpwquality-0__1.2.3-5.el7.x86_64",
+            "sha256": "4cab5d54e3baf5d94dc3f8bf92cef72215dcf3354903493bdd19fa02629bf385",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libpwquality-1.2.3-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libselinux-0__2.5-15.el7.x86_64",
+            "sha256": "06a5ab8e6feff677b312426988773600996a0a299878bf661e149a53d42c3edb",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libselinux-2.5-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libsemanage-0__2.5-14.el7.x86_64",
+            "sha256": "972053b1bd0750a8cb71fc730b0cf39f478595271574879cd37a1ec14ca0df3a",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libsemanage-2.5-14.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libsepol-0__2.5-10.el7.x86_64",
+            "sha256": "8511766d381a8e1cd4c0f72fab7cfd8d78f147cb6bcd2e39844de5850001f3c5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libsepol-2.5-10.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libsmartcols-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "8bb27e3133d87750b1501993b54e0bc9006242f30c7f46e98b7e0bc0a450cf2f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libsmartcols-2.23.2-65.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libssh2-0__1.8.0-4.el7_9.1.x86_64",
+            "sha256": "2f2fef32bd829834efcff997a91ea78ebad9913aec9b94421efa69579be8f39c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libssh2-1.8.0-4.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libstdc__plus____plus__-0__4.8.5-44.el7.x86_64",
+            "sha256": "e2b6a7f6eadfbc9473638713cc816b4a19e4be6d4774d6ca91ad9bc79a3b07d2",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libstdc++-4.8.5-44.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libtasn1-0__4.10-1.el7.x86_64",
+            "sha256": "1eaec9f67f2e84e097979010b7ba623b8b309c6b54d14639b98abaeceb50f6bd",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libtasn1-4.10-1.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libuser-0__0.60-9.el7.x86_64",
+            "sha256": "ba434776576f756862bc5cb38db567fc5cf926ec970d93d5a2bd6b9abace7347",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libuser-0.60-9.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libutempter-0__1.1.6-4.el7.x86_64",
+            "sha256": "e207571fb7183338140ddc9017b005e070c19601d052332ffdc04e44fb5c1c40",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libutempter-1.1.6-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libuuid-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "f530a65c0efca53f618f63e02801129283b12266fbf21ac221e35617a45b0d4b",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libuuid-2.23.2-65.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libverto-0__0.2.5-4.el7.x86_64",
+            "sha256": "e8485822ec59dbb056057ae28872f673574fe70162aed18bb315fcbb8819d8cd",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/libverto-0.2.5-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "libxml2-0__2.9.1-6.el7_9.6.x86_64",
+            "sha256": "ffdb0e908ca8cc9013d59da38b6a5d9d04ea15e6af25a38508bc92e04af68500",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/libxml2-2.9.1-6.el7_9.6.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "lua-0__5.1.4-15.el7.x86_64",
+            "sha256": "887f57bea33cf2d0ad66f02554a0aa9bfa37d12e1b3e5651c0dbf8bd8e5ed039",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/lua-5.1.4-15.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "lz4-0__1.8.3-1.el7.x86_64",
+            "sha256": "ee9f4ea262d18561d84bc94fcfa877701b25daf46bd55f85eb75a1a914796750",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/lz4-1.8.3-1.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "ncurses-0__5.9-14.20130511.el7_4.x86_64",
+            "sha256": "59773dff8c5aa8f084fd2edc88b5dc34f574f254ec98280fc2b0adafe07f85a2",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/ncurses-5.9-14.20130511.el7_4.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "ncurses-base-0__5.9-14.20130511.el7_4.x86_64",
+            "sha256": "9b008b5d10b431676ac53ee028c3f4349cc56b9f8dc831569b9ac95d1603c802",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/ncurses-base-5.9-14.20130511.el7_4.noarch.rpm"
+            ]
+        },
+        {
+            "name": "ncurses-libs-0__5.9-14.20130511.el7_4.x86_64",
+            "sha256": "7bb52546082410c98e9d3d1a80bba05cee335f5b0adecc633ffa8a8c8c1b4c38",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/ncurses-libs-5.9-14.20130511.el7_4.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nspr-0__4.35.0-1.el7_9.x86_64",
+            "sha256": "2d2d708e0066e80880184f19ceae8aceb4c6fdafaa3674831f96b0d35d4f1fd9",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nspr-4.35.0-1.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nss-0__3.90.0-2.el7_9.x86_64",
+            "sha256": "4ea1017b5a921ab782e09ead7f9368a70cc11716ebe116ff1cbc4c7bc8cddf99",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nss-3.90.0-2.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nss-pem-0__1.0.3-7.el7_9.1.x86_64",
+            "sha256": "6f6a33848cbd89fc9434117312104d1e8bcbc065f6821b6b24ebf04def7bf36d",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nss-pem-1.0.3-7.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nss-softokn-0__3.90.0-6.el7_9.x86_64",
+            "sha256": "63b78d16ff05658c1581a33fcbba6aef6d587165c3310243fa9aef6ae820ac57",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nss-softokn-3.90.0-6.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nss-softokn-freebl-0__3.90.0-6.el7_9.x86_64",
+            "sha256": "4499296b0da4f8a6353fc0b32880c2dd463d4a440d98446b29fd4d12a5a2ed28",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nss-softokn-freebl-3.90.0-6.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nss-sysinit-0__3.90.0-2.el7_9.x86_64",
+            "sha256": "ebc3f9be0c742cb29c3852f630ce1ed5605f07849ea71b3f6dcad16424055700",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nss-sysinit-3.90.0-2.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nss-tools-0__3.90.0-2.el7_9.x86_64",
+            "sha256": "794a3fb2e476acfb436f4d7da625bc3f96841861ad270f795c67ff6046875f47",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nss-tools-3.90.0-2.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "nss-util-0__3.90.0-1.el7_9.x86_64",
+            "sha256": "f6b2698566260a93a03d412c81d071599637c1e75b05da8cabdcc3de0e4591ea",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/nss-util-3.90.0-1.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "openldap-0__2.4.44-25.el7_9.x86_64",
+            "sha256": "a41884a9bea64c478434afa440f59ad7fb2b3251861261bfa51c4a6142be01f3",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/openldap-2.4.44-25.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "openssl-libs-1__1.0.2k-26.el7_9.x86_64",
+            "sha256": "658486f1d946fc518624c59a2badf6990f524bb7d5d660d1e34420cc78dcfe62",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/openssl-libs-1.0.2k-26.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "p11-kit-0__0.23.5-3.el7.x86_64",
+            "sha256": "8a15990e66c12cfe913f738c87ce772e2e86e67ca27f36ccb43e07eb171c201f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/p11-kit-0.23.5-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "p11-kit-trust-0__0.23.5-3.el7.x86_64",
+            "sha256": "7e5ce466ca45170eceb8acff500515db49ce24ffd786f1550a4a60b4a271c1cf",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/p11-kit-trust-0.23.5-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pam-0__1.1.8-23.el7.x86_64",
+            "sha256": "4bcedfb072c60646dbcf42ad4accdec8541a1cfbcb3a6dad3b03dec2380b69f1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pam-1.1.8-23.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "patch-0__2.7.1-12.el7_7.x86_64",
+            "sha256": "9a8f6127a0007b32f2d91dc96bcad03401613517cb1000be0aaba4c0f65d9096",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/patch-2.7.1-12.el7_7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pcre-0__8.32-17.el7.x86_64",
+            "sha256": "cf2b84402e9a9fcf92c8a8a965c4e8d217e82e80c0945de2ce8d46c17131ad28",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pcre-8.32-17.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-4__5.16.3-299.el7_9.x86_64",
+            "sha256": "02cad16355e1d26c8bd3d5c772f181d7659d048dff3d0ae06e95050139572deb",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/perl-5.16.3-299.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Carp-0__1.26-244.el7.x86_64",
+            "sha256": "c83bc46f443a0da5cf4a4e046d852965690c9b5b1ce13650d56469d09359fa54",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Carp-1.26-244.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Encode-0__2.51-7.el7.x86_64",
+            "sha256": "1832157f604642cff3cfc83c2ffbca39e5ada0d970dff3535b305bd796892a28",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Encode-2.51-7.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Exporter-0__5.68-3.el7.x86_64",
+            "sha256": "571e251ffdab4e51a3622560c38a071a4809762f033e8ec36570376fb09efe06",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Exporter-5.68-3.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-File-Path-0__2.09-2.el7.x86_64",
+            "sha256": "9dd4651c54825f1c879a0704a2839178ef23b41b851882d8b31c18be91248c52",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-File-Path-2.09-2.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-File-Temp-0__0.23.01-3.el7.x86_64",
+            "sha256": "4075ba31733a5f2a96decc05c7717088c6da6eb652895ff5f143bad940b395e1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-File-Temp-0.23.01-3.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Filter-0__1.49-3.el7.x86_64",
+            "sha256": "cb5722f026db35db6cf7df32b313fef8111b2c3a861dc97bbf44b957baffbe26",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Filter-1.49-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Getopt-Long-0__2.40-3.el7.x86_64",
+            "sha256": "79d13ff6ae55c94fcef5e0cd4725f482fae53d286a0aa096adbc9664d7dd51c8",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Getopt-Long-2.40-3.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-HTTP-Tiny-0__0.033-3.el7.x86_64",
+            "sha256": "808b970e0588bd6fc2f4bbfeeb27c9d1b53c4b603fac579d5baa56d8966e2dde",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-HTTP-Tiny-0.033-3.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-PathTools-0__3.40-5.el7.x86_64",
+            "sha256": "a423b2925cc6bc0a38a19276638d0ffbf106ecb55fd19bc91ea4b4c72f2e37ad",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-PathTools-3.40-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Pod-Escapes-1__1.04-299.el7_9.x86_64",
+            "sha256": "01fb0c20e028f3f34cb3fc42c0360980946fc9b2e0f4b1cfcbe93c2777912606",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/perl-Pod-Escapes-1.04-299.el7_9.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Pod-Perldoc-0__3.20-4.el7.x86_64",
+            "sha256": "a1e5dc32793778cfca3450cb36a56e646c553791f9447dbb17c008258fac66fd",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Pod-Perldoc-3.20-4.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Pod-Simple-1__3.28-4.el7.x86_64",
+            "sha256": "37477d53b294682d2149e4360a000624b98a86e75c818f099281b6f551aeee9b",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Pod-Simple-3.28-4.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Pod-Usage-0__1.63-3.el7.x86_64",
+            "sha256": "217a860e88715be0e342dd3c80c426db2f555c86abb7b30c4335c1b1f0d86d6f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Pod-Usage-1.63-3.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Scalar-List-Utils-0__1.27-248.el7.x86_64",
+            "sha256": "02ad51a0ad70e7a72ef67340ce0e27ba89ce76c6d54b97445ce45fe45f2eae4c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Scalar-List-Utils-1.27-248.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Socket-0__2.010-5.el7.x86_64",
+            "sha256": "94af85a6d3e00578b5bcac4b0f138e295fa2e58261af69b31b638173fe6f3ee9",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Socket-2.010-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Storable-0__2.45-3.el7.x86_64",
+            "sha256": "c6515b144cafa2e8db7f0e7c374bd6e87611d913223398bc5f5751c935ff116b",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Storable-2.45-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Text-ParseWords-0__3.29-4.el7.x86_64",
+            "sha256": "93abab69d308e93eeb9a9dbbdbfcac21c839dca7550823322338eae15459cb8c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Text-ParseWords-3.29-4.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Thread-Queue-0__3.02-2.el7.x86_64",
+            "sha256": "3c2f2095f04b3ea08bb34726624737303f9ffa40fb9a3bfdfc43158dd04945f5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Thread-Queue-3.02-2.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-Time-HiRes-4__1.9725-3.el7.x86_64",
+            "sha256": "e3d95533e4858b389705fa209c2aa0e266b8f1cff9c5e9405058a9bae4eee4c1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Time-HiRes-1.9725-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-Time-Local-0__1.2300-2.el7.x86_64",
+            "sha256": "b831661fe8f91f6d3167cea24fbe7158db0fc91c12373f7a9d342f4aa582cb7c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-Time-Local-1.2300-2.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-constant-0__1.27-2.el7.x86_64",
+            "sha256": "e4a5cace856083b3a429086c21b45d5ae1e5915461ba6563a1983c96d1301cf5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-constant-1.27-2.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-libs-4__5.16.3-299.el7_9.x86_64",
+            "sha256": "3a16156819b55d3d9e234fe19ee8f016b2394f4d77627ba4be2bfe06f19a148f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/perl-libs-5.16.3-299.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-macros-4__5.16.3-299.el7_9.x86_64",
+            "sha256": "0ba33a407f36442d9f5f526712fe0c940b67897540b9e10a14271928cffed297",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/perl-macros-5.16.3-299.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-parent-1__0.225-244.el7.x86_64",
+            "sha256": "754ef02e64056327874eb67c1076a49b17c8188244d2cd849f3b64f3836d7469",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-parent-0.225-244.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-podlators-0__2.5.1-3.el7.x86_64",
+            "sha256": "f7ed23552f7d31053d407ae014c5bc8c97dd81e47b845921231661129b78ebad",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-podlators-2.5.1-3.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-srpm-macros-0__1-8.el7.x86_64",
+            "sha256": "762f3b556f25b560b824b574eb3ffb62d0b4a26716dfba8c3473491e0ecca38c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-srpm-macros-1-8.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "perl-threads-0__1.87-4.el7.x86_64",
+            "sha256": "2c644399da6651a79855863f1d136a7cd21b80b0bd8c7406f6c6af0f00924c37",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-threads-1.87-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "perl-threads-shared-0__1.43-6.el7.x86_64",
+            "sha256": "2774f9ada3e533d2745619f8209c0af20179d96bf40fd930da350a9dda5e4b10",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/perl-threads-shared-1.43-6.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pinentry-0__0.8.1-17.el7.x86_64",
+            "sha256": "5daa28bbe26b27fb6b2281e04e6f4d16327cd0bd79cb01c79ec137a833a10fd0",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pinentry-0.8.1-17.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pkgconfig-1__0.27.1-4.el7.x86_64",
+            "sha256": "f1657fdfde54c44ab83cd52315e64cc81e5bc10267ea37ebd3a12adfdd1c2725",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pkgconfig-0.27.1-4.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "popt-0__1.13-16.el7.x86_64",
+            "sha256": "1622216de88b06bde92cfc8eee1dd0f0a1d8368a1036cdb2d45b6ed9e382b36b",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/popt-1.13-16.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "procps-ng-0__3.3.10-28.el7.x86_64",
+            "sha256": "c3acdc7803c9973b51194f5631cbf4c28a33df6c00226d12b5c393e713f40843",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/procps-ng-3.3.10-28.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "pth-0__2.0.7-23.el7.x86_64",
+            "sha256": "4b26fdbdd7a3a653b1bce3ee3ff498c907159d1f872ce35705f32475ef196499",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/pth-2.0.7-23.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "python-libs-0__2.7.5-94.el7_9.x86_64",
+            "sha256": "c8476e1d935321320f812a72c05a7442201d6f34050996100637f18917d65923",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/python-libs-2.7.5-94.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "python-srpm-macros-0__3-34.el7.x86_64",
+            "sha256": "d8ffe49719b82758c973bf8d53cd6b0171e699b30d15562fb375473c57b15e06",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/python-srpm-macros-3-34.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "qrencode-libs-0__3.4.1-3.el7.x86_64",
+            "sha256": "f19091fbca108faf0693c2f71080780f27b86531ba555aba1f9c345b9fe06c8d",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/qrencode-libs-3.4.1-3.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "readline-0__6.2-11.el7.x86_64",
+            "sha256": "d9e52b61beb1ac9c3006604d9ebd4f930f667b64478a61fd78de7ed74922f52e",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/readline-6.2-11.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "redhat-rpm-config-0__9.1.0-88.el7.centos.x86_64",
+            "sha256": "cc5fa6f07c62b14f91b23e111193967d1252516240124110209ee78d3f52d009",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/redhat-rpm-config-9.1.0-88.el7.centos.noarch.rpm"
+            ]
+        },
+        {
+            "name": "rpm-0__4.11.3-48.el7_9.x86_64",
+            "sha256": "6999892560bc188d71af958078c8b9560ffeb626747978ac0a90a392c446598f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/rpm-4.11.3-48.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "rpm-build-0__4.11.3-48.el7_9.x86_64",
+            "sha256": "838de1ef14179e1a8bb9c6a1bab3b688e72d7571e8442fa520294f469817484e",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/rpm-build-4.11.3-48.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "rpm-build-libs-0__4.11.3-48.el7_9.x86_64",
+            "sha256": "d850176c0a4cdf0424b72ae4e068e7464ebcaba44a41850c646e0e7b0e8b2ac7",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/rpm-build-libs-4.11.3-48.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "rpm-libs-0__4.11.3-48.el7_9.x86_64",
+            "sha256": "9d9440a2b4ed4979c7741c8ff246d32dd982cf24ff59fb679bee4516ab71f0d1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/rpm-libs-4.11.3-48.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "sed-0__4.2.2-7.el7.x86_64",
+            "sha256": "a7eea50560a40b4775797d3b25cf5bddf1826ae1f95db89f18f9b3dbd958e23f",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/sed-4.2.2-7.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "setup-0__2.8.71-11.el7.x86_64",
+            "sha256": "43028ba601af4be8f3b3eb2b125fb46777a8a4b869ec829d4b7f92202b4957c5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/setup-2.8.71-11.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "shadow-utils-2__4.6-5.el7.x86_64",
+            "sha256": "c15500133ecdeae9a4cb95383e541b4ed537f11c970477eef0ac3c40a6354528",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/shadow-utils-4.6-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "shared-mime-info-0__1.8-5.el7.x86_64",
+            "sha256": "0aa76ca3cfed11160209645030d76f1dd23941132112df7d25799e4d7519f457",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/shared-mime-info-1.8-5.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "sqlite-0__3.7.17-8.el7_7.1.x86_64",
+            "sha256": "93ffb0eb1e297c35cee76add2e583efb990da702684bbfaa6b159494d135d99c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/sqlite-3.7.17-8.el7_7.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "systemd-0__219-78.el7_9.9.x86_64",
+            "sha256": "518634909b8077578379878100a6cc50c82ef6ffa0726ef538f628609f07e436",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/systemd-219-78.el7_9.9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "systemd-libs-0__219-78.el7_9.9.x86_64",
+            "sha256": "65584369e0052524a4788078e14f671f1ab55c3f0e2f3ea69702c77b5242d309",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/systemd-libs-219-78.el7_9.9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "tar-2__1.26-35.el7.x86_64",
+            "sha256": "485b6eacc50eb95c3d7612220346ee2c09fd509fecce33e6c23abc122698727c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/tar-1.26-35.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "tzdata-0__2023c-1.el7.x86_64",
+            "sha256": "94f2a00b93b3f897df457012da67dd3358c6c280b2c7b40b81b965f4420ce5b1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/tzdata-2023c-1.el7.noarch.rpm"
+            ]
+        },
+        {
+            "name": "unzip-0__6.0-24.el7_9.x86_64",
+            "sha256": "317a76559462ea9c4e676627bc07ad51cdeabb16ed71de9e1006e9136d921666",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/unzip-6.0-24.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "ustr-0__1.0.4-16.el7.x86_64",
+            "sha256": "40ee91d0da6a99162fba9c6c2549ebc79338684996637881402158faae5670e5",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/ustr-1.0.4-16.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "util-linux-0__2.23.2-65.el7_9.1.x86_64",
+            "sha256": "ba087a07d4834f084f6c1c67dd0871b4faec0852cdda6a66f64c6203f78ef56c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/util-linux-2.23.2-65.el7_9.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "xz-0__5.2.2-2.el7_9.x86_64",
+            "sha256": "775f41c9398da339ae50faf7692eb4b9de783c58e046c6c24f659c666b25eb48",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/xz-5.2.2-2.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "xz-libs-0__5.2.2-2.el7_9.x86_64",
+            "sha256": "4b698de5fd7e0a64306106f3018e9d00dedc1f7a46d354339f012c97d004bd0c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/xz-libs-5.2.2-2.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "zip-0__3.0-11.el7.x86_64",
+            "sha256": "e9c503014ae9358b1f50cc01a55d9edf519b219b5a775183aba5b19d9f4fc16a",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/zip-3.0-11.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "zlib-0__1.2.7-21.el7_9.x86_64",
+            "sha256": "2bee86d12902723756eafa82ba6cc322136c4a67a78e0104ac988e14eb7fb5a1",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/zlib-1.2.7-21.el7_9.x86_64.rpm"
+            ]
+        }
+    ]
+}

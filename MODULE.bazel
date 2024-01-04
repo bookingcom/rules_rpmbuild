@@ -51,21 +51,17 @@ bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True
 
 rpm_deps = use_extension("@bazeldnf//:extensions.bzl", "rpm_deps")
 rpm_deps.lock_file(
-    generated_visibility = [
-        "//visibility:public",
-    ],
     path = "rpmtree/centos7/filesystem.json",
     rpm_tree_name = "centos7-filesystem",
 )
 rpm_deps.lock_file(
-    path = "rpmtree/centos7/rpm.json",
-    rpm_tree_name = "centos7-rpm",
+    generated_visibility = [
+        "//visibility:public",
+    ],
+    path = "rpmtree/centos7/rpm-build.json",
+    rpm_tree_name = "centos7-rpm-build",
 )
-rpm_deps.lock_file(
-    path = "rpmtree/centos7/yum-with-no-filesystem.json",
-    rpm_tree_name = "centos7-yum-with-no-filesystem",
-)
-use_repo(rpm_deps, "centos7-filesystem", "centos7-rpm", "centos7-yum-with-no-filesystem")
+use_repo(rpm_deps, "centos7-filesystem", "centos7-rpm-build")
 
 # this comes from aspect_bazel_lib MODULE.bazel
 bazel_lib_toolchains = use_extension("@aspect_bazel_lib//lib:extensions.bzl", "toolchains")

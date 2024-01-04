@@ -1,0 +1,15 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "fake-container_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/bookingcom/rules_rpmbuild/cmd/fake-container",
+    visibility = ["//visibility:private"],
+    deps = ["@org_golang_x_sys//unix"],
+)
+
+go_binary(
+    name = "fake-container",
+    embed = [":fake-container_lib"],
+    visibility = ["//visibility:public"],
+)
