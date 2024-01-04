@@ -12,11 +12,11 @@ bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0", dev_dependenc
 bazel_dep(name = "bazeldnf", version = "0.6.0")
 bazel_dep(name = "aspect_bazel_lib", version = "2.1.0")
 
-BAZELDNF_COMMIT = "80a6103bfc4fc8fb59c35d95531471ebf1d29e00"
+BAZELDNF_COMMIT = "8e110d32399ab1c3db08e18f015b3e7e092a27de"
 
 archive_override(
     module_name = "bazeldnf",
-    integrity = "sha256-kHxLgzDgWYkm68qOqS4vnFDsv5XtFz0sHo4x36nIckM=",
+    integrity = "sha256-x1+AOKCknpmFjGfdPJ5cR6+lhjjKX0zh5vlVn2YYHuM=",
     strip_prefix = "bazeldnf-%s" % BAZELDNF_COMMIT,
     urls = [
         "https://github.com/bookingcom/bazeldnf/archive/%s.tar.gz" % BAZELDNF_COMMIT,
@@ -44,14 +44,7 @@ go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
 go_deps.from_file(go_mod = "//:go.mod")
 use_repo(
     go_deps,
-    "com_github_bazelbuild_buildtools",
-    "com_github_crillab_gophersat",
-    "com_github_onsi_gomega",
-    "com_github_sassoftware_go_rpmutils",
-    "com_github_sirupsen_logrus",
-    "com_github_spf13_cobra",
-    "io_k8s_sigs_yaml",
-    "org_golang_x_crypto",
+    "org_golang_x_sys",
 )
 
 bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True)

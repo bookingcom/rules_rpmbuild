@@ -3,6 +3,8 @@ build --bes_backend=grpcs://bookingcom-opensource.buildbuddy.io
 build --remote_cache=grpcs://bookingcom-opensource.buildbuddy.io
 build --remote_timeout=3600
 
+common --experimental_isolated_extension_usages
+
 #build --remote_executor=grpcs://remote.buildbuddy.io
 
 build --incompatible_strict_action_env
