@@ -1,0 +1,12 @@
+load("@bash-rpm-deps//:rpms.bzl", "RPMS")
+load("@rules_rpmbuild//rpmbuild:rpmbuild.bzl", "rpmbuild")
+
+rpmbuild(
+    name = "bash",
+    spec_file = "bash.spec",
+    sources = {
+        "@bash-source//file": "SOURCES/bash.tar.gz"
+    },
+    rpms = RPMS,
+    rpm_build_archive = "@rules_rpmbuild//rpmtree/centos7:bootstrap",
+)

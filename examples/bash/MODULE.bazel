@@ -1,0 +1,39 @@
+module(
+    name = "rules_rpmbuild_example_perl5380",
+    version = "0.0.1",
+)
+
+bazel_dep(name = "rules_rpmbuild", version = "0.0.1")
+local_path_override(
+    module_name = "rules_rpmbuild",
+    path = "../../",
+)
+
+BAZELDNF_COMMIT = "8e110d32399ab1c3db08e18f015b3e7e092a27de"
+
+bazel_dep(name = "bazeldnf", version = "0.6.0")
+archive_override(
+    module_name = "bazeldnf",
+    integrity = "sha256-x1+AOKCknpmFjGfdPJ5cR6+lhjjKX0zh5vlVn2YYHuM=",
+    strip_prefix = "bazeldnf-%s" % BAZELDNF_COMMIT,
+    urls = [
+        "https://github.com/bookingcom/bazeldnf/archive/%s.tar.gz" % BAZELDNF_COMMIT,
+    ],
+)
+
+http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
+
+http_file(
+    name = "bash-source",
+    integrity = "sha256-yOMb3Fm2mq/8WzZQmQW6Ply7EnRwkdJ7S5d/B4Vg1bg=",
+    urls = [
+        "https://ftp.gnu.org/gnu/bash/bash-5.2.21.tar.gz",
+    ],
+)
+
+rpm_deps = use_extension("@bazeldnf//:extensions.bzl", "rpm_deps")
+rpm_deps.lock_file(
+    path = "bash-rpm-deps.json",
+    rpm_tree_name = "bash-rpm-deps",
+)
+use_repo(rpm_deps, "bash-rpm-deps")
