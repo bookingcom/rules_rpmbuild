@@ -1,5 +1,5 @@
 module(
-    name = "rules_rpmbuild_example_perl5380",
+    name = "rules_rpmbuild_bash",
     version = "0.0.1",
 )
 

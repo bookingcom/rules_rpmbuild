@@ -1,6 +1,6 @@
 load("@centos7-filesystem//:rpms.bzl", _filesystem = "RPMS")
 load("@centos7-rpm-build//:rpms.bzl", "RPMS")
-load("//:bootstrap.bzl", "bootstrap")
+load("//rpmbuild:bootstrap.bzl", "bootstrap")
 
 bootstrap(
     name = "bootstrap",

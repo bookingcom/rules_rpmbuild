@@ -7,3 +7,7 @@ bazeldnf(
         "//visibility:public"
     ]
 )
+
+exports_files([
+    "bootstrap.sh"
+])

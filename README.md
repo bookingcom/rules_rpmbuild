@@ -92,7 +92,7 @@ Then you need to create a `BUILD.bazel` with
 ```python
 load("@{your filesystem rpmtree name}//:rpms.bzl", _filesystem = "RPMS")
 load("@{your rpm-build rpmtree name}//:rpms.bzl", "RPMS")
-load("@rules_rpmbuild//:bootstrap.bzl", "bootstrap")
+load("@rules_rpmbuild//rpmbuild:bootstrap.bzl", "bootstrap")
 
 bootstrap(
     name = "rpm-build",
