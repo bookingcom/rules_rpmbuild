@@ -63,12 +63,12 @@ own rpm repo yaml configuration file pointing to all the repositories you need.
 Then you can generate the rpm tree by running:
 
 ```bash
-bazel run @rules_rpm//rpmbuild:bazeldnf -- fetch --repofile {config.yaml}
+bazel run @rules_rpmbuild//rpmbuild:bazeldnf -- fetch --repofile {config.yaml}
 
 # on CentOS7 there's a special rpm called filesystem which creates
 # a working file system, with some symlinks, this one is hard to
 # run properly so we need to strip it out
-bazel run @rules_rpm//rpmbuild:bazeldnf -- rpmtree \
+bazel run @rules_rpmbuild//rpmbuild:bazeldnf -- rpmtree \
     --repofile {config.yaml} \
     --arch {your-target-arch} \
     --basesystem {your-base-system for centos-release} \
@@ -77,7 +77,7 @@ bazel run @rules_rpm//rpmbuild:bazeldnf -- rpmtree \
     --name {your filesystem rpmtree name} \
     filesystem
 
-bazel run @rules_rpm//rpmbuild:bazeldnf -- rpmtree \
+bazel run @rules_rpmbuild//rpmbuild:bazeldnf -- rpmtree \
     --repofile {config.yaml} \
     --arch {your-target-arch} \
     --basesystem {your-base-system for centos-release} \
