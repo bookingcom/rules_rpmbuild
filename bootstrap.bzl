@@ -42,10 +42,9 @@ def _bootstrap_impl(ctx):
 
     ctx.actions.run_shell(
         inputs = depset(
-            direct = ctx.files.rpm_rpmtree,
+            direct = ctx.files.rpm_rpmtree + ctx.files._fakeroot + ctx.files._fakecontainer + ctx.files.rpms + ctx.files.filesystem,
             transitive = [
                 bsdtar.default.files,
-                depset(direct = ctx.files._fakeroot + ctx.files._fakecontainer + ctx.files.rpms + ctx.files.filesystem),
             ],
         ),
         outputs = [out],
@@ -73,7 +72,7 @@ bootstrap = rule(
         "rpm_rpmtree": attr.label(doc = "bazeldnf rpmtree that provides an rpm binary", allow_single_file = True),
         "filesystem": attr.label_list(allow_files = True, doc = "list of labels pointing to the filesystem rpm and depedencies"),
         "rpm_install_flags": attr.string_list(default = [], doc = "flags to pass to rpm install"),
-        "_fakeroot": attr.label(default = "@fakeroot//cmd/nsfakeroot", executable = True, cfg = "exec"),
+        "_fakeroot": attr.label(default = "//cmd/fakeroot", executable = True, cfg = "exec"),
         "_fakecontainer": attr.label(default = "//cmd/fake-container", executable = True, cfg = "exec"),
     },
     toolchains = [

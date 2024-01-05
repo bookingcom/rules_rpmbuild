@@ -5,8 +5,8 @@ module(
 
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
 bazel_dep(name = "rules_go", version = "0.44.0")
+bazel_dep(name = "gazelle", version = "0.35.0")
 
-bazel_dep(name = "gazelle", version = "0.35.0", dev_dependency = True)
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0", dev_dependency = True)
 
 bazel_dep(name = "bazeldnf", version = "0.6.0")
@@ -20,23 +20,6 @@ archive_override(
     strip_prefix = "bazeldnf-%s" % BAZELDNF_COMMIT,
     urls = [
         "https://github.com/bookingcom/bazeldnf/archive/%s.tar.gz" % BAZELDNF_COMMIT,
-    ],
-)
-
-bazel_dep(name = "fakeroot", version = "0.0.1")
-
-FAKEROOT_COMMIT = "b2da39c1be0cbd47b2f156d61b6dd04ea0594e1e"
-
-archive_override(
-    module_name = "fakeroot",
-    integrity = "sha256-RHEyVU1I424iXypAUdWjXYWDQe5mIXYcXnAWNVPZHjc=",
-    patch_strip = 1,
-    patches = [
-        "//:patches/0001-bazel-adding-bzlmod-support.patch",
-    ],
-    strip_prefix = "fakeroot-%s" % FAKEROOT_COMMIT,
-    urls = [
-        "https://github.com/lure-sh/fakeroot/archive/%s.tar.gz" % FAKEROOT_COMMIT,
     ],
 )
 
@@ -55,9 +38,6 @@ rpm_deps.lock_file(
     rpm_tree_name = "centos7-filesystem",
 )
 rpm_deps.lock_file(
-    generated_visibility = [
-        "//visibility:public",
-    ],
     path = "rpmtree/centos7/rpm-build.json",
     rpm_tree_name = "centos7-rpm-build",
 )
@@ -66,7 +46,8 @@ use_repo(rpm_deps, "centos7-filesystem", "centos7-rpm-build")
 # this comes from aspect_bazel_lib MODULE.bazel
 bazel_lib_toolchains = use_extension("@aspect_bazel_lib//lib:extensions.bzl", "toolchains")
 bazel_lib_toolchains.tar()
-use_repo(bazel_lib_toolchains, "bsd_tar_toolchains")
+bazel_lib_toolchains.coreutils()
+use_repo(bazel_lib_toolchains, "bsd_tar_toolchains", "coreutils_toolchains")
 
 register_toolchains(
     # Expand bsd_tar_toolchains
@@ -75,4 +56,5 @@ register_toolchains(
     "@bsd_tar_toolchains//:windows_amd64_toolchain",
     # host toolchain must be last, as it's only suitable as a fallback on macos
     "@bsd_tar_toolchains//:host_toolchain",
+    "@coreutils_toolchains//:all",
 )
