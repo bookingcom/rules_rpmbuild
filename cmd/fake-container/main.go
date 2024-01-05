@@ -29,7 +29,10 @@ func run() {
 	}
 
 	cmd := exec.Command("/proc/self/exe", os.Args[1:]...)
-	cmd.Env = append(cmd.Env, fmt.Sprintf("%s=1", INSIDE_CHROOT))
+	cmd.Env = append(cmd.Env,
+		fmt.Sprintf("%s=1", INSIDE_CHROOT),
+		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+	)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -42,6 +45,7 @@ func run() {
 			syscall.CLONE_NEWUTS,		// isolated hostname and domainname
 	}
 	uid := os.Getuid()
+	gid := os.Getgid()
 	if uid != 0 {
 		cmd.SysProcAttr.UidMappings = append(cmd.SysProcAttr.UidMappings, syscall.SysProcIDMap{
 			ContainerID: 0,
@@ -51,7 +55,7 @@ func run() {
 
 		cmd.SysProcAttr.GidMappings = append(cmd.SysProcAttr.GidMappings, syscall.SysProcIDMap{
 			ContainerID: 0,
-			HostID:      uid,
+			HostID:      gid,
 			Size:        1,
 		})
 	}
@@ -93,6 +97,7 @@ func runInNamespace() {
 	os.MkdirAll(chroot + "/dev", 0777)
 	mountDevFile(chroot, "/dev/urandom")
 	mountDevFile(chroot, "/dev/random")
+	mountDevFile(chroot, "/dev/null")
 
 	err := syscall.Chroot(chroot)
 	if err != nil {
@@ -116,6 +121,7 @@ func runInNamespace() {
 	syscall.Unmount("/proc", 0)
 	syscall.Unmount("/dev/urandom", 0)
 	syscall.Unmount("/dev/random", 0)
+	syscall.Unmount("/dev/null", 0)
 
 	os.RemoveAll("/dev")
 	os.RemoveAll("/proc")
