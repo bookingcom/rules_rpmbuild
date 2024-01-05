@@ -51,7 +51,7 @@ exec {fakeroot} {tar} -czf {output} -C /tmp/rpm/chroot .
 def _bootstrap_impl(ctx):
     bsdtar = ctx.toolchains[TAR_TOOLCHAIN]
 
-    out = ctx.actions.declare_file("bootstrap-target.tar.gz")
+    out = ctx.actions.declare_file("%s.tar.gz" % ctx.label.name)
 
     rpms = " ".join([x.path for x in ctx.files.rpms])
     filesystem = " ".join([x.path for x in ctx.files.filesystem])
