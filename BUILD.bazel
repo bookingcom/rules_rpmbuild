@@ -13,7 +13,7 @@ buildifier(
     mode = "fix",
 )
 
-bazeldnf(
+alias(
     name = "bazeldnf",
-    use_prebuilt = False,
+    actual = "//rpmbuild:bazeldnf"
 )

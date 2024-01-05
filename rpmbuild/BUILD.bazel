@@ -1,0 +1,9 @@
+load("@bazeldnf//:def.bzl", "bazeldnf")
+
+bazeldnf(
+    name = "bazeldnf",
+    use_prebuilt = False,
+    visibility = [
+        "//visibility:public"
+    ]
+)

@@ -7,7 +7,8 @@
     ],
     "arch": "x86_64",
     "required": [
-        "rpm-build"
+        "rpm-build",
+        "shadow-utils"
     ],
     "version": 2,
     "force-ignore-with-dependencies": [

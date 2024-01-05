@@ -9,4 +9,7 @@ common --experimental_isolated_extension_usages
 
 build --incompatible_strict_action_env
 
+build:debug --noincompatible_sandbox_hermetic_tmp --sandbox_debug
+build --experimental_ui_max_stdouterr_bytes=104857600
+
 try-import %workspace%/.bazelrc.user
