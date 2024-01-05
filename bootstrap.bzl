@@ -3,24 +3,39 @@ TAR_TOOLCHAIN = "@aspect_bazel_lib//lib:tar_toolchain_type"
 _BOOTSTRAP_CMD = """
 set -exo pipefail
 
-mkdir -p /tmp/rpm/chroot /tmp/rpm/chroot/usr/bin /tmp/rpm/chroot/usr/lib64 /tmp/rpm/chroot/var/spool/mail /tmp/rpm/chroot/tmp
 
-( cd /tmp/rpm/chroot && ln -s ./usr/bin bin && ln -s ./usr/lib64 lib64 )
-( cd /tmp/rpm/chroot/var && ln -s spool/mail mail )
-( cd /tmp/rpm/chroot/usr && ln -s ../tmp tmp )
+prepare_root () {{
+    mkdir -p $1 $1/usr/bin
+    mkdir -p $1 $1/usr/bin $1/usr/lib64 $1/var/spool/mail $1/tmp
+
+    ( cd $1 && ln -s ./usr/bin bin && ln -s ./usr/lib64 lib64 )
+    ( cd $1/var && ln -s spool/mail mail )
+    ( cd $1/usr && ln -s ../tmp tmp )
+    mkdir -p $1/dev $1/proc $1/sys
+    chmod 777 $1/dev $1/proc $1/sys
+}}
+
+if [ -d /tmp/rpm ]; then
+    chmod -R +w /tmp/rpm
+    rm -rf /tmp/rpm
+fi
+
+mkdir -p /tmp/rpm
 
 {fakeroot} {tar} -xf {rpmtree} -C /tmp/rpm
 
+mkdir -p /tmp/rpm/external
+
 cp --parents {filesystem} {rpms} /tmp/rpm
+
+prepare_root /tmp/rpm/chroot
 
 {fakecontainer} \
     /tmp/rpm \
-        /bin/rpm \
+        rpm \
             --root /chroot \
             --dbpath /var/lib/rpm \
-            --install --justdb --force --reinstall --verbose {filesystem}
-
-cp --parents -f {rpms} /tmp/rpm
+            --install --justdb --force --verbose {filesystem}
 
 {fakecontainer} \
     /tmp/rpm \
@@ -29,6 +44,7 @@ cp --parents -f {rpms} /tmp/rpm
             --dbpath /var/lib/rpm \
             --install --force --verbose {flags} {rpms}
 
+rm -rf /tmp/rpm/chroot/dev /tmp/rpm/chroot/proc /tmp/rpm/chroot/sys
 exec {fakeroot} {tar} -czf {output} -C /tmp/rpm/chroot .
 """
 

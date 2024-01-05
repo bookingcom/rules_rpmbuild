@@ -60,6 +60,7 @@ func run() {
 		})
 	}
 
+	fmt.Fprintln(os.Stderr, "Starting command inside namespace")
 	cmd.Run()
 }
 
@@ -85,13 +86,16 @@ func mountDevFile(chroot string, filename string) {
 		fmt.Println("Failed to mount", filename, err)
 		os.Exit(1)
 	}
+	fmt.Fprintln(os.Stderr, "mounted in chroot", filename)
 }
 
 func runInNamespace() {
+	fmt.Fprintln(os.Stderr, "Inside namespace")
 	syscall.Sethostname([]byte("inside-container"))
 
 	chroot := os.Args[1]
 
+	fmt.Fprintln(os.Stderr, "mounting chroot")
 	mountProc(chroot)
 
 	os.MkdirAll(chroot + "/dev", 0777)
@@ -99,12 +103,14 @@ func runInNamespace() {
 	mountDevFile(chroot, "/dev/random")
 	mountDevFile(chroot, "/dev/null")
 
+	fmt.Fprintln(os.Stderr, "syscall.chroot", chroot)
 	err := syscall.Chroot(chroot)
 	if err != nil {
 		fmt.Println("Failed to chroot:", err)
 		os.Exit(1)
 	}
 
+	fmt.Fprintln(os.Stderr, "syscall.chdir")
 	err = syscall.Chdir("/") // set the working directory inside container
 	if err != nil {
 		fmt.Println("Failed to chdir:", err)
@@ -116,7 +122,11 @@ func runInNamespace() {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	cmd.Run()
+	fmt.Fprintln(os.Stderr, "About to execute:", os.Args[2:])
+	err = cmd.Run()
+	if err != nil {
+		fmt.Println("error from execute", err)
+	}
 
 	syscall.Unmount("/proc", 0)
 	syscall.Unmount("/dev/urandom", 0)
