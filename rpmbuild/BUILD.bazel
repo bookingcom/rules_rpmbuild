@@ -9,5 +9,6 @@ bazeldnf(
 )
 
 exports_files([
-    "bootstrap.sh"
+    "bootstrap.sh",
+    "rpmbuild.sh"
 ])

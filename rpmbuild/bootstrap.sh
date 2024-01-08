@@ -36,7 +36,7 @@ prepare_root /tmp/rpm/chroot
 
 {fakecontainer} \
     /tmp/rpm \
-        /bin/rpm \
+        rpm \
             --root /chroot \
             --dbpath /var/lib/rpm \
             --install --force --verbose {flags} {rpms}
