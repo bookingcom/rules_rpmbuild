@@ -27,7 +27,10 @@ func run() {
 	}
 
 	cmd := exec.Command("/proc/self/exe", os.Args[1:]...)
-	cmd.Env = append(cmd.Env, fmt.Sprintf("%s=1", INSIDE_CHROOT))
+	cmd.Env = append(cmd.Env,
+		fmt.Sprintf("%s=1", INSIDE_CHROOT),
+		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+	)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr

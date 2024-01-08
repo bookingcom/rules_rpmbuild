@@ -12,7 +12,8 @@ mkdir -p /tmp/rpmbuild/rpmbuild
 {fakeroot} {tar} -xf {rpm_build_archive} -C /tmp/rpmbuild
 
 if [ ! -z "{rpms}" ]; then
-    cp --parents {rpms} /tmp/rpmbuild
+    {fakeroot} mkdir -p /tmp/rpmbuild/external
+    {fakeroot} cp --parents {rpms} /tmp/rpmbuild
 
     {fakecontainer} /tmp/rpmbuild rpm --rebuilddb
 
