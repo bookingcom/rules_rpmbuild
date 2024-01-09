@@ -61,7 +61,19 @@ func run() {
 	}
 
 	fmt.Fprintln(os.Stderr, "Starting command inside namespace")
-	cmd.Run()
+
+	err := cmd.Run()
+	if err == nil {
+		os.Exit(0)
+	}
+
+	if exiterr, ok := err.(*exec.ExitError); ok {
+		ws := exiterr.Sys().(syscall.WaitStatus)
+		fmt.Println("Command failed with exit code:", ws.ExitStatus())
+		os.Exit(int(ws.ExitStatus()))
+	}
+	fmt.Fprintln(os.Stderr, "Command failed:", err)
+	os.Exit(1)
 }
 
 
@@ -124,8 +136,17 @@ func runInNamespace() {
 
 	fmt.Fprintln(os.Stderr, "About to execute:", os.Args[2:])
 	err = cmd.Run()
+	exitStatus := 0
+
 	if err != nil {
-		fmt.Println("error from execute", err)
+		if exiterr, ok := err.(*exec.ExitError); ok {
+			ws := exiterr.Sys().(syscall.WaitStatus)
+			fmt.Println("Command failed with exit code:", ws.ExitStatus())
+			exitStatus = int(ws.ExitStatus())
+		} else {
+			fmt.Fprintln(os.Stderr, "Command failed:", err)
+			exitStatus = 1
+		}
 	}
 
 	syscall.Unmount("/proc", 0)
@@ -135,4 +156,6 @@ func runInNamespace() {
 
 	os.RemoveAll("/dev")
 	os.RemoveAll("/proc")
+
+	os.Exit(exitStatus)
 }

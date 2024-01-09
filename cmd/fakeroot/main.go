@@ -53,7 +53,18 @@ func run() {
 		})
 	}
 
-	cmd.Run()
+	err := cmd.Run()
+	if err == nil {
+		os.Exit(0)
+	}
+	if exiterr, ok := err.(*exec.ExitError); ok {
+		ws := exiterr.Sys().(syscall.WaitStatus)
+		fmt.Println("Command failed with exit code:", ws.ExitStatus())
+		os.Exit(int(ws.ExitStatus()))
+	} else {
+		fmt.Fprintln(os.Stderr, "Command failed:", err)
+		os.Exit(1)
+	}
 }
 
 func runInNamespace() {
@@ -64,5 +75,17 @@ func runInNamespace() {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	cmd.Run()
+	err := cmd.Run()
+	if err == nil {
+		os.Exit(0)
+	}
+
+	if exiterr, ok := err.(*exec.ExitError); ok {
+		ws := exiterr.Sys().(syscall.WaitStatus)
+		fmt.Println("Command failed with exit code:", ws.ExitStatus())
+		os.Exit(int(ws.ExitStatus()))
+	} else {
+		fmt.Fprintln(os.Stderr, "Command failed:", err)
+		os.Exit(1)
+	}
 }
