@@ -3,9 +3,9 @@
 set -exo pipefail
 
 prepare_root () {
-    mkdir -p $1 $1/usr/bin $1/usr/lib64 $1/var/spool/mail $1/tmp
+    mkdir -p $1 $1/usr/bin $1/usr/lib64 $1/usr/slib $1/var/spool/mail $1/tmp
 
-    ( cd $1 && ln -s ./usr/bin bin && ln -s ./usr/lib64 lib64 )
+    ( cd $1 && ln -s ./usr/bin bin && ln -s ./usr/lib64 lib64 && ln -s ./usr/slib slib )
     ( cd $1/var && ln -s spool/mail mail )
     ( cd $1/usr && ln -s ../tmp tmp )
     mkdir -p $1/dev $1/proc $1/sys
@@ -32,14 +32,7 @@ prepare_root /tmp/rpm/chroot
         rpm \
             --root /chroot \
             --dbpath /var/lib/rpm \
-            --install --justdb --force --verbose {filesystem}
-
-{fakecontainer} \
-    /tmp/rpm \
-        rpm \
-            --root /chroot \
-            --dbpath /var/lib/rpm \
-            --install --force --verbose {flags} {rpms}
+            --install --force --verbose {flags} {filesystem} {rpms}
 
 {fakeroot} rm -rf /tmp/rpm/chroot/dev /tmp/rpm/chroot/proc /tmp/rpm/chroot/sys
 

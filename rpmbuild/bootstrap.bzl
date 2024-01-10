@@ -1,3 +1,5 @@
+load(":utils.bzl", "deduplicate_rpms")
+
 TAR_TOOLCHAIN = "@aspect_bazel_lib//lib:tar_toolchain_type"
 
 def _bootstrap_impl(ctx):
@@ -47,7 +49,7 @@ def _bootstrap_impl(ctx):
         files = depset([out]),
     )
 
-bootstrap = rule(
+_bootstrap = rule(
     implementation = _bootstrap_impl,
     attrs = {
         "rpms": attr.label_list(allow_files = True, doc = "list of RPMs to bootstrap the rpm binary"),
@@ -62,3 +64,7 @@ bootstrap = rule(
         TAR_TOOLCHAIN,
     ],
 )
+
+def bootstrap(rpms, filesystem, **kwargs):
+    rpms = deduplicate_rpms(rpms, filesystem)
+    _bootstrap(rpms = rpms, filesystem = filesystem, **kwargs)

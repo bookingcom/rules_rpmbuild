@@ -1,4 +1,5 @@
 load("@aspect_bazel_lib//lib:copy_file.bzl", "COPY_FILE_TOOLCHAINS", "copy_file_action")
+load(":utils.bzl", "deduplicate_rpms")
 
 TAR_TOOLCHAIN = "@aspect_bazel_lib//lib:tar_toolchain_type"
 
@@ -66,7 +67,7 @@ def _rpmbuild_impl(ctx):
         files = depset([out]),
     )
 
-rpmbuild = rule(
+_rpmbuild = rule(
     implementation = _rpmbuild_impl,
     attrs = {
         "rpm_build_archive": attr.label(allow_single_file = True, doc = "label with a ready to use rpm-build chroot"),
@@ -80,3 +81,7 @@ rpmbuild = rule(
     },
     toolchains = [ TAR_TOOLCHAIN ] + COPY_FILE_TOOLCHAINS,
 )
+
+def rpmbuild(rpms = [], rpm_build_rpms = [], **kwargs):
+    rpms = deduplicate_rpms(rpms, rpm_build_rpms)
+    _rpmbuild(rpms = rpms, **kwargs)
