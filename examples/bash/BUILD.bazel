@@ -1,5 +1,8 @@
 load("@bash-rpm-deps//:rpms.bzl", "RPMS")
+load("@centos7-rpm-build//:rpms.bzl", rpm_build_rpms="RPMS")
+load("@centos7-filesystem//:rpms.bzl", filesystem_rpms="RPMS")
 load("@rules_rpmbuild//rpmbuild:rpmbuild.bzl", "rpmbuild")
+
 
 rpmbuild(
     name = "bash",
@@ -9,4 +12,5 @@ rpmbuild(
     },
     rpms = RPMS,
     rpm_build_archive = "@rules_rpmbuild//rpmtree/centos7:bootstrap",
+    rpm_build_rpms = rpm_build_rpms + filesystem_rpms,
 )

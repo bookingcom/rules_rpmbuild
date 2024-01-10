@@ -18,9 +18,7 @@
         "texinfo"
     ],
     "version": 2,
-    "force-ignore-with-dependencies": [
-        "filesystem"
-    ],
+    "force-ignore-with-dependencies": null,
     "rpms": [
         {
             "name": "autoconf-0__2.69-11.el7.x86_64",
@@ -104,6 +102,13 @@
             "sha256": "6cc655263da0213df7eb5a2c6c63b5825361f55336855a67a7b33881d10ca955",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/expat-2.1.0-15.el7_9.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "filesystem-0__3.2-25.el7.x86_64",
+            "sha256": "8469f8a37730ec410956bb41322c6fabc7fe99e649b3a14328ad98fad4b5096e",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/filesystem-3.2-25.el7.x86_64.rpm"
             ]
         },
         {

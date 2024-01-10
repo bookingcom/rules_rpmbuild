@@ -11,9 +11,7 @@
         "shadow-utils"
     ],
     "version": 2,
-    "force-ignore-with-dependencies": [
-        "filesystem"
-    ],
+    "force-ignore-with-dependencies": null,
     "rpms": [
         {
             "name": "acl-0__2.2.51-15.el7.x86_64",

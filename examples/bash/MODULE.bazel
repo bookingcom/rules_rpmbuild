@@ -36,4 +36,4 @@ rpm_deps.lock_file(
     path = "bash-rpm-deps.json",
     rpm_tree_name = "bash-rpm-deps",
 )
-use_repo(rpm_deps, "bash-rpm-deps")
+use_repo(rpm_deps, "bash-rpm-deps", "centos7-rpm-build", "centos7-filesystem")
