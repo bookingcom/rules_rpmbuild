@@ -1,14 +1,21 @@
 load("@bazeldnf//:def.bzl", "bazeldnf")
 
+package(default_visibility = ["//visibility:public"])
+
 bazeldnf(
     name = "bazeldnf",
     use_prebuilt = False,
-    visibility = [
-        "//visibility:public"
-    ]
 )
 
 exports_files([
     "bootstrap.sh",
-    "rpmbuild.sh"
+    "rpmbuild.sh",
 ])
+
+toolchain_type(
+    name = "patchelf_toolchain_type",
+)
+
+toolchain_type(
+    name = "reproducible_rpmbuild_toolchain_type"
+)

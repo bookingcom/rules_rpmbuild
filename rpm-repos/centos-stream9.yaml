@@ -1,0 +1,7 @@
+repositories:
+  - arch: x86_64
+    name: centos-stream-9-baseos
+    baseurl: https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/
+  - arch: x86_64
+    name: centos-stream-9-appstream
+    baseurl: https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/

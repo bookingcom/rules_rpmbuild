@@ -1,0 +1,1 @@
+exports_files(["setup_reproducible_rpmbuild.sh"])

@@ -4,7 +4,7 @@ module(
 )
 
 bazel_dep(name = "bazel_skylib", version = "1.5.0")
-
+bazel_dep(name = "platforms", version = "0.0.7")
 bazel_dep(name = "hermetic_cc_toolchain", version = "2.1.3")
 
 toolchains = use_extension("@hermetic_cc_toolchain//toolchain:ext.bzl", "toolchains")
@@ -18,7 +18,6 @@ register_toolchains(
     "@zig_sdk//toolchain:windows_amd64",
     "@zig_sdk//toolchain:windows_arm64",
 )
-
 
 bazel_dep(name = "rules_go", version = "0.44.0")
 bazel_dep(name = "gazelle", version = "0.35.0")
@@ -57,7 +56,18 @@ rpm_deps.lock_file(
     path = "rpmtree/centos7/rpm-build.json",
     rpm_tree_name = "centos7-rpm-build",
 )
-use_repo(rpm_deps, "centos7-filesystem", "centos7-rpm-build")
+rpm_deps.lock_file(
+    path = "rpmbuild/rpm-build-centos9.json",
+    rpm_tree_name = "rpm-build-centos9",
+)
+use_repo(
+    rpm_deps,
+    "centos7-filesystem",
+    "centos7-rpm-build",
+    "rpm-build-centos9",
+)
+
+
 
 # this comes from aspect_bazel_lib MODULE.bazel
 bazel_lib_toolchains = use_extension("@aspect_bazel_lib//lib:extensions.bzl", "toolchains")
@@ -73,4 +83,15 @@ register_toolchains(
     # host toolchain must be last, as it's only suitable as a fallback on macos
     "@bsd_tar_toolchains//:host_toolchain",
     "@coreutils_toolchains//:all",
+)
+
+
+rpmbuild_toolchains = use_extension("//rpmbuild:extensions.bzl", "toolchains")
+rpmbuild_toolchains.patchelf()
+rpmbuild_toolchains.reproducible_rpmbuild()
+use_repo(rpmbuild_toolchains, "patchelf_toolchains", "reproducible_rpmbuild_toolchains")
+
+register_toolchains(
+    "@patchelf_toolchains//:all",
+    "@reproducible_rpmbuild_toolchains//:all",
 )
