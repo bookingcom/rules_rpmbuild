@@ -2,6 +2,10 @@
 %define baseversion 5.2
 %bcond_without tests
 
+%if 0%{?rhel} < 8
+%undefine _annotated_build
+%endif
+
 Version: %{baseversion}%{patchleveltag}
 Name: bash
 Summary: The GNU Bourne Again shell
@@ -12,13 +16,20 @@ Url: http://www.gnu.org/software/bash
 Source0: bash.tar.gz
 
 
-BuildRequires: texinfo bison
-BuildRequires: ncurses-devel
 BuildRequires: autoconf
-BuildRequires: gettext
+BuildRequires: binutils
+BuildRequires: bison
+BuildRequires: coreutils
+BuildRequires: diffutils
+BuildRequires: findutils
 BuildRequires: gcc
 BuildRequires: gcc-c++
+BuildRequires: gettext
+BuildRequires: gzip
 BuildRequires: make
+BuildRequires: ncurses-devel
+BuildRequires: tar
+BuildRequires: texinfo
 
 Conflicts: filesystem < 3
 
@@ -48,7 +59,6 @@ echo %{version} > _distribution
 echo %{release} > _patchlevel
 
 %build
-#cd %{name}-%{baseversion}%{patchleveltag}
 %configure --with-bash-malloc=no --with-afs
 
 # Recycles pids is neccessary. When bash's last fork's pid was X
@@ -59,6 +69,7 @@ make "CPPFLAGS=-D_GNU_SOURCE -DRECYCLES_PIDS -DDEFAULT_PATH_VALUE='\"/usr/local/
 %install
 %make_install
 
+
 %files
 %defattr(-,root,root)
 %license COPYING
@@ -66,7 +77,8 @@ make "CPPFLAGS=-D_GNU_SOURCE -DRECYCLES_PIDS -DDEFAULT_PATH_VALUE='\"/usr/local/
 %{_libdir}/%{name}/*
 %{_defaultdocdir}/%{name}/*
 %{_mandir}/*/*
-%{_datadir}/info/
+%{_datadir}/info/*
+%exclude %{_datadir}/info/dir
 %{_datadir}/locale/
 
 %files devel
@@ -74,5 +86,8 @@ make "CPPFLAGS=-D_GNU_SOURCE -DRECYCLES_PIDS -DDEFAULT_PATH_VALUE='\"/usr/local/
 %{_libdir}/pkgconfig/*
 
 %changelog
+* Tue Jan 16 2024 Manuel Naranjo <manuel.naranjo@booking.com> - 5.2.21-2
+- Added missing dependencies
+- Making the build reproducible
 * Fri Jan 05 2024 Manuel Naranjo <manuel.naranjo@booking.com> - 5.2.21-1
 - Mocking for rules_rpmbuild

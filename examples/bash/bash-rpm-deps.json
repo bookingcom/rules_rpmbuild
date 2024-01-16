@@ -8,13 +8,18 @@
     "arch": "x86_64",
     "required": [
         "autoconf",
+        "binutils",
         "bison",
         "coreutils",
+        "diffutils",
+        "findutils",
         "gcc",
         "gcc-c++",
         "gettext",
+        "gzip",
         "make",
         "ncurses-devel",
+        "tar",
         "texinfo"
     ],
     "version": 2,
@@ -98,6 +103,13 @@
             ]
         },
         {
+            "name": "diffutils-0__3.3-6.el7_9.x86_64",
+            "sha256": "3b822a517d29541cd78da3a94ca8b9ce8095283d799bf7d7ebe96461744ae90d",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/diffutils-3.3-6.el7_9.x86_64.rpm"
+            ]
+        },
+        {
             "name": "expat-0__2.1.0-15.el7_9.x86_64",
             "sha256": "6cc655263da0213df7eb5a2c6c63b5825361f55336855a67a7b33881d10ca955",
             "urls": [
@@ -109,6 +121,13 @@
             "sha256": "8469f8a37730ec410956bb41322c6fabc7fe99e649b3a14328ad98fad4b5096e",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/filesystem-3.2-25.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "findutils-1__4.5.11-6.el7.x86_64",
+            "sha256": "f3af811b9e932b3b01908dbe62313dae3663166a038753d3636757a5bb556538",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/findutils-4.5.11-6.el7.x86_64.rpm"
             ]
         },
         {
@@ -207,6 +226,13 @@
             "sha256": "b74d29df8bbe8ccfdc162278cbd21e4d4139c49e484d66a8b06f86ce037882f4",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/groff-base-1.22.2-8.el7.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "gzip-0__1.5-11.el7_9.x86_64",
+            "sha256": "a38a894774d443bd314d09acaa9ee6056116e25f757c9e76290fe30450b9ca95",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/updates/x86_64/Packages/gzip-1.5-11.el7_9.x86_64.rpm"
             ]
         },
         {
@@ -753,6 +779,13 @@
             "sha256": "93ffb0eb1e297c35cee76add2e583efb990da702684bbfaa6b159494d135d99c",
             "urls": [
                 "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/sqlite-3.7.17-8.el7_7.1.x86_64.rpm"
+            ]
+        },
+        {
+            "name": "tar-2__1.26-35.el7.x86_64",
+            "sha256": "485b6eacc50eb95c3d7612220346ee2c09fd509fecce33e6c23abc122698727c",
+            "urls": [
+                "https://mirror.ams1.nl.leaseweb.net/centos/7.9.2009/os/x86_64/Packages/tar-1.26-35.el7.x86_64.rpm"
             ]
         },
         {
