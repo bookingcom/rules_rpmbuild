@@ -33,6 +33,13 @@ func run() {
 		fmt.Sprintf("%s=1", INSIDE_CHROOT),
 		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
 	)
+
+	_, epoch := os.LookupEnv("SOURCE_DATE_EPOCH")
+	if epoch {
+		fmt.Fprintln(os.Stderr, "Propagating SOURCE_DATE_EPOCH:", os.Getenv("SOURCE_DATE_EPOCH"))
+		cmd.Env = append(cmd.Env, "SOURCE_DATE_EPOCH=" + os.Getenv("SOURCE_DATE_EPOCH"))
+	}
+
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
