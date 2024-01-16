@@ -1,11 +1,22 @@
 load("@aspect_bazel_lib//lib:copy_file.bzl", "COPY_FILE_TOOLCHAINS", "copy_file_action")
+load("//rpmbuild/private:utils.bzl", "utils")
 load(":utils.bzl", "deduplicate_rpms")
 
 TAR_TOOLCHAIN = "@aspect_bazel_lib//lib:tar_toolchain_type"
+RPM_TOOLCHAIN = "@rules_rpmbuild//rpmbuild:reproducible_rpmbuild_toolchain_type"
+
+
+def _copy_rpms(ctx, path, files):
+    basepath = ""
+    out = []
+    for f in files:
+        dst = ctx.actions.declare_file("external/{}/{}".format(path, f.basename))
+        basepath = dst.path.rsplit("/", 1)[0]
+        copy_file_action(ctx, src=f, dst=dst)
+        out.append(dst)
+    return basepath, out
 
 def _rpmbuild_impl(ctx):
-    bsdtar = ctx.toolchains[TAR_TOOLCHAIN]
-
     out = ctx.actions.declare_directory("{}-output".format(ctx.label.name))
 
     sources = []
@@ -19,47 +30,60 @@ def _rpmbuild_impl(ctx):
         sources.append(dst)
         if "/" in v:
             copy_sources.append(
-                "mkdir -p /tmp/rpmbuild/rpmbuild/%s" % (v.rsplit("/", 1)[0])
+                "mkdir -p /tmp/rpm/rpmbuild/%s" % (v.rsplit("/", 1)[0])
             )
         copy_sources.append(
-            "cp %s /tmp/rpmbuild/rpmbuild/%s" % (dst.path, v)
+            "cp %s /tmp/rpm/rpmbuild/%s" % (dst.path, v)
         )
 
-    script = ctx.actions.declare_file("%s.sh" % ctx.label.name)
-
-    ctx.actions.expand_template(
-        template = ctx.file._build_template,
-        output = script,
-        substitutions = {
-            "{copy_sources}": "\n".join(copy_sources),
-            "{fakecontainer}": ctx.executable._fakecontainer.path,
-            "{fakeroot}": ctx.executable._fakeroot.path,
-            "{flags}": " ".join(ctx.attr.rpm_install_flags),
-            "{output}": out.path,
-            "{rpm_build_archive}": ctx.file.rpm_build_archive.path,
-            "{rpms}": " ".join([x.path for x in ctx.files.rpms]),
-            "{spec}": ctx.file.spec_file.path,
-            "{spec_basename}": ctx.file.spec_file.basename,
-            "{tar}": bsdtar.tarinfo.binary.path,
-        },
+    copy_files_script = ctx.actions.declare_file("%s-copy-files.sh" % ctx.label.name)
+    ctx.actions.write(
+        output = copy_files_script,
         is_executable = True,
+        content = """#!/usr/bin/env bash
+
+set -exuo pipefail
+
+{}
+""".format("\n".join(copy_sources))
     )
+
+    deps_rpms_basepath, deps_rpms = _copy_rpms(ctx, "deps", ctx.files.deps_rpms)
+    filesystem_rpms_basepath, filesystem_rpms = _copy_rpms(ctx, "filesystem", ctx.files.filesystem_rpms)
+    rpmbuild_rpms_basepath, rpmbuild_rpms = _copy_rpms(ctx, "rpmbuild", ctx.files.rpmbuild_rpms)
+
+    env = utils.compute_env(ctx, {
+        "OUTPUT": out.path,
+        "SPEC": ctx.file.spec_file.path,
+        "SPEC_BASENAME": ctx.file.spec_file.basename,
+        "FLAGS": " ".join(ctx.attr.rpm_install_flags),
+        "DEPS_RPMS": deps_rpms_basepath,
+        "FILESYSTEM_RPMS": filesystem_rpms_basepath,
+        "RPMBUILD_RPMS": rpmbuild_rpms_basepath,
+        "COPY_FILES": copy_files_script.path,
+        "DEPS_RPMTREE": ctx.file.deps_rpmtree.path,
+        "FILESYSTEM_RPMTREE": ctx.file.filesystem_rpmtree.path,
+        "RPMBUILD_RPMTREE": ctx.file.rpmbuild_rpmtree.path,
+    })
 
     ctx.actions.run_shell(
         inputs = depset(
-            direct = [script] +
-                ctx.files.rpms +
+            direct = [copy_files_script] +
+                ctx.files._build_template +
+                ctx.files.deps_rpmtree +
+                ctx.files.rpmbuild_rpmtree +
+                ctx.files.filesystem_rpmtree +
                 ctx.files.spec_file +
+                utils.tool_dependencies(ctx) +
                 sources +
-                ctx.files._fakeroot +
-                ctx.files._fakecontainer +
-                ctx.files.rpm_build_archive,
-            transitive = [
-                bsdtar.default.files,
-            ],
+                deps_rpms +
+                filesystem_rpms +
+                rpmbuild_rpms,
+            transitive = utils.toolchain_dependencies(ctx),
         ),
+        env = env,
         outputs = [out],
-        command = script.path,
+        command = ctx.file._build_template.path,
         mnemonic = "BuildRpm",
     )
 
@@ -67,21 +91,33 @@ def _rpmbuild_impl(ctx):
         files = depset([out]),
     )
 
+_rpmbuild_attrs = {
+    "deps_rpms": attr.label_list(allow_files = True, allow_empty = True, doc = "build dependencies for the package to be built"),
+    "deps_rpmtree":attr.label(allow_single_file = True, doc = "label with an rpmtree providing your dependencies"),
+    "filesystem_rpms": attr.label_list(allow_files = True, allow_empty = False, doc = "rpms for the filesystem rpmtree"),
+    "filesystem_rpmtree":attr.label(allow_single_file = True, doc = "label with an rpmtree providing a file system"),
+    "rpmbuild_rpms": attr.label_list(allow_files = True, allow_empty = False, doc = "rpms for the rpm-build rpmtree for your system"),
+    "rpmbuild_rpmtree":attr.label(allow_single_file = True, doc = "label with an working rpm-build for your system"),
+    "rpm_install_flags": attr.string_list(default = [], doc = "flags to pass to rpm install"),
+    "sources": attr.label_keyed_string_dict(allow_files = True, doc = "map of extra files required to build the rpm and their target location in the rpmbuild structure"),
+    "spec_file": attr.label(allow_single_file = True, doc = "spec file for the rpm to be built"),
+    "_build_template": attr.label(default = Label("//rpmbuild:rpmbuild.sh"), allow_single_file = True),
+}
+
+_rpmbuild_attrs.update(utils.common_attrs)
+
 _rpmbuild = rule(
     implementation = _rpmbuild_impl,
-    attrs = {
-        "rpm_build_archive": attr.label(allow_single_file = True, doc = "label with a ready to use rpm-build chroot"),
-        "rpms": attr.label_list(allow_files = True, doc = "extra rpms required to install for the package to be built"),
-        "spec_file": attr.label(allow_single_file = True, doc = "spec file for the rpm to be built"),
-        "sources": attr.label_keyed_string_dict(allow_files = True, doc = "map of extra files required to build the rpm and their target location in the rpmbuild structure"),
-        "rpm_install_flags": attr.string_list(default = [], doc = "flags to pass to rpm install"),
-        "_fakeroot": attr.label(default = "//cmd/fakeroot", executable = True, cfg = "exec"),
-        "_fakecontainer": attr.label(default = "//cmd/fake-container", executable = True, cfg = "exec"),
-        "_build_template": attr.label(default = Label("//rpmbuild:rpmbuild.sh"), allow_single_file = True),
-    },
-    toolchains = [ TAR_TOOLCHAIN ] + COPY_FILE_TOOLCHAINS,
+    attrs = _rpmbuild_attrs,
+    toolchains = utils.toolchains + COPY_FILE_TOOLCHAINS,
 )
 
-def rpmbuild(rpms = [], rpm_build_rpms = [], **kwargs):
-    rpms = deduplicate_rpms(rpms, rpm_build_rpms)
-    _rpmbuild(rpms = rpms, **kwargs)
+def rpmbuild(deps_rpms = [], filesystem_rpms = [], rpmbuild_rpms = [], **kwargs):
+    rpmbuild_rpms = deduplicate_rpms(rpmbuild_rpms, filesystem_rpms)
+    deps_rpms = deduplicate_rpms(deps_rpms, rpmbuild_rpms + filesystem_rpms)
+    _rpmbuild(
+        deps_rpms = deps_rpms,
+        filesystem_rpms = filesystem_rpms,
+        rpmbuild_rpms = rpmbuild_rpms,
+        **kwargs
+    )
