@@ -48,7 +48,6 @@ set -exuo pipefail
 """.format("\n".join(copy_sources))
     )
 
-    deps_rpms_basepath, deps_rpms = _copy_rpms(ctx, "deps", ctx.files.deps_rpms)
     filesystem_rpms_basepath, filesystem_rpms = _copy_rpms(ctx, "filesystem", ctx.files.filesystem_rpms)
     rpmbuild_rpms_basepath, rpmbuild_rpms = _copy_rpms(ctx, "rpmbuild", ctx.files.rpmbuild_rpms)
 
@@ -57,28 +56,36 @@ set -exuo pipefail
         "SPEC": ctx.file.spec_file.path,
         "SPEC_BASENAME": ctx.file.spec_file.basename,
         "FLAGS": " ".join(ctx.attr.rpm_install_flags),
-        "DEPS_RPMS": deps_rpms_basepath,
         "FILESYSTEM_RPMS": filesystem_rpms_basepath,
         "RPMBUILD_RPMS": rpmbuild_rpms_basepath,
         "COPY_FILES": copy_files_script.path,
-        "DEPS_RPMTREE": ctx.file.deps_rpmtree.path,
         "FILESYSTEM_RPMTREE": ctx.file.filesystem_rpmtree.path,
         "RPMBUILD_RPMTREE": ctx.file.rpmbuild_rpmtree.path,
     })
 
+    depset_direct = [copy_files_script] + \
+        ctx.files._build_template + \
+        ctx.files.deps_rpmtree + \
+        ctx.files.rpmbuild_rpmtree + \
+        ctx.files.filesystem_rpmtree + \
+        ctx.files.spec_file + \
+        utils.tool_dependencies(ctx) + \
+        sources + \
+        filesystem_rpms + \
+        rpmbuild_rpms
+
+    if ctx.attr.deps_rpmtree != None:
+        print(ctx.attr.deps_rpmtree)
+        if len(ctx.files.deps_rpms) == 0:
+            fail("deps_rpms should not be an empty list if deps_rpmtree is not Null")
+        deps_rpms_basepath, deps_rpms = _copy_rpms(ctx, "deps", ctx.files.deps_rpms)
+        env["DEPS_RPMTREE"] = ctx.file.deps_rpmtree.path
+        env["DEPS_RPMS"] = deps_rpms_basepath
+        depset_direct = depset_direct + deps_rpms
+
     ctx.actions.run_shell(
         inputs = depset(
-            direct = [copy_files_script] +
-                ctx.files._build_template +
-                ctx.files.deps_rpmtree +
-                ctx.files.rpmbuild_rpmtree +
-                ctx.files.filesystem_rpmtree +
-                ctx.files.spec_file +
-                utils.tool_dependencies(ctx) +
-                sources +
-                deps_rpms +
-                filesystem_rpms +
-                rpmbuild_rpms,
+            direct = depset_direct,
             transitive = utils.toolchain_dependencies(ctx),
         ),
         env = env,

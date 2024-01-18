@@ -1,4 +1,4 @@
-load("@bash-rpm-deps//:rpms.bzl", "RPMS")
+load("@bash-rpm-deps//:rpms.bzl", deps_rpms="RPMS")
 load("@centos7-filesystem//:rpms.bzl", filesystem_rpms="RPMS")
 load("@centos7-rpm-build//:rpms.bzl", rpmbuild_rpms="RPMS")
 load("@rules_rpmbuild//rpmbuild:rpmbuild.bzl", "rpmbuild")
@@ -10,7 +10,7 @@ rpmbuild(
     sources = {
         "@bash-source//file": "SOURCES/bash.tar.gz"
     },
-    deps_rpms = RPMS,
+    deps_rpms = deps_rpms,
     filesystem_rpms = filesystem_rpms,
     rpmbuild_rpms = rpmbuild_rpms,
     deps_rpmtree = "@bash-rpm-deps//:rpms",

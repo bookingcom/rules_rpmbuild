@@ -30,11 +30,15 @@ ${FAKEROOT} ${BSDTAR_BIN} -xkmf ${RPMBUILD_RPMTREE} -C /tmp/rpm
 ${FAKEROOT} ${BSDTAR_BIN} -xkmf ${RPM_ARCHIVE} -C /tmp/rpm
 
 # build dependencies
-${FAKEROOT} ${BSDTAR_BIN} -xkmf ${DEPS_RPMTREE} -C /tmp/rpm
+if [ -n "${DEPS_RPMS:-}" ]; then
+    ${FAKEROOT} ${BSDTAR_BIN} -xkmf ${DEPS_RPMTREE} -C /tmp/rpm
+fi
 
 # fix some paths
 for i in bin lib64 sbin ; do
-    ${FAKEROOT} bash -c "cd /tmp/rpm && mv ${i}/* usr/${i} && rmdir ${i} && ln -s usr/${i} ."
+    find /tmp/rpm/${i}/ -mindepth 1 -maxdepth 1 -exec ${FAKEROOT} mv {} /tmp/rpm/usr/${i} \;
+    ${FAKEROOT} rmdir /tmp/rpm/${i}
+    ${FAKEROOT} bash -c "cd /tmp/rpm && ln -s usr/${i} ."
 done
 
 if grep -q -F "__perl_provides" /tmp/rpm/etc/rpm/macros.perl ; then
@@ -52,6 +56,12 @@ ${FAKEROOT} \
 
 ${FAKEROOT} mkdir -p /tmp/rpm/var/lib/rpm
 
+RPMS="${CWD}/${FILESYSTEM_RPMS}/*.rpm ${CWD}/${RPMBUILD_RPMS}/*.rpm"
+
+if [ -n "${DEPS_RPMS:-}" ]; then
+    RPMS="${RPMS} ${CWD}/${DEPS_RPMS:-}/*.rpm"
+fi
+
 ${FAKEROOT} \
     /tmp/rpm/${RPM_INTERPRETER} /tmp/rpm/${RPM_BIN} \
         --install \
@@ -61,9 +71,7 @@ ${FAKEROOT} \
         --justdb \
         --verbose \
         ${FLAGS} \
-        ${CWD}/${FILESYSTEM_RPMS}/*.rpm \
-        ${CWD}/${RPMBUILD_RPMS}/*.rpm \
-        ${CWD}/${DEPS_RPMS}/*.rpm
+        ${RPMS}
 
 cp ${SPEC} /tmp/rpm/rpmbuild
 

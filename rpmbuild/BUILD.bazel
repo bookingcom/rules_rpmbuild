@@ -17,5 +17,5 @@ toolchain_type(
 )
 
 toolchain_type(
-    name = "reproducible_rpmbuild_toolchain_type"
+    name = "reproducible_rpmbuild_toolchain_type",
 )

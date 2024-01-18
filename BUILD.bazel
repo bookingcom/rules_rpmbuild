@@ -14,5 +14,5 @@ buildifier(
 
 alias(
     name = "bazeldnf",
-    actual = "//rpmbuild:bazeldnf"
+    actual = "//rpmbuild:bazeldnf",
 )
