@@ -81,7 +81,6 @@ set -exuo pipefail
         rpmbuild_rpms
 
     if ctx.attr.deps_rpmtree != None:
-        print(ctx.attr.deps_rpmtree)
         if len(ctx.files.deps_rpms) == 0:
             fail("deps_rpms should not be an empty list if deps_rpmtree is not Null")
         deps_rpms_basepath, deps_rpms = _copy_rpms(ctx, "deps", ctx.files.deps_rpms)
