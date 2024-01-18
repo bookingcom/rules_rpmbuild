@@ -18,22 +18,26 @@ def compute_env(ctx, env = {}):
     Returns:
         The populated environment dictionary
     """
+
+    out = dict(ctx.configuration.default_shell_env)
+    out.update(env)
+
     for name in [TAR_TOOLCHAIN, RPM_TOOLCHAIN]:
         if name not in ctx.toolchains:
             continue
         toolchain = ctx.toolchains[name]
         for k, v in toolchain.template_variables.variables.items():
-            env[k] = v
+            out[k] = v
         if name == RPM_TOOLCHAIN:
-            env["RPM_ARCHIVE"] = toolchain.default.files.to_list()[0].path
+            out["RPM_ARCHIVE"] = toolchain.default.files.to_list()[0].path
 
     if getattr(ctx.executable, "_fakeroot", None):
-        env["FAKEROOT"] = ctx.executable._fakeroot.path
+        out["FAKEROOT"] = ctx.executable._fakeroot.path
 
     if getattr(ctx.executable, "_fakecontainer", None):
-        env["FAKECONTAINER"] = ctx.executable._fakecontainer.path
+        out["FAKECONTAINER"] = ctx.executable._fakecontainer.path
 
-    return env
+    return out
 
 def toolchain_dependencies(ctx):
     """Computes the list of files required from the available toolchains
