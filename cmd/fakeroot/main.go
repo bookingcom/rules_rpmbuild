@@ -7,6 +7,8 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
+
+	"github.com/bookingcom/rules_rpmbuild/tools/debug"
 )
 
 const INSIDE_CHROOT = "INSIDE_CHROOT"
@@ -33,7 +35,7 @@ func run() {
 	)
 	_, epoch := os.LookupEnv("SOURCE_DATE_EPOCH")
 	if epoch {
-		fmt.Fprintln(os.Stderr, "Propagating SOURCE_DATE_EPOCH:", os.Getenv("SOURCE_DATE_EPOCH"))
+		debug.DEBUG("Propagating SOURCE_DATE_EPOCH:", os.Getenv("SOURCE_DATE_EPOCH"))
 		cmd.Env = append(cmd.Env, "SOURCE_DATE_EPOCH=" + os.Getenv("SOURCE_DATE_EPOCH"))
 	}
 	cmd.Stdin = os.Stdin
@@ -64,10 +66,10 @@ func run() {
 	}
 	if exiterr, ok := err.(*exec.ExitError); ok {
 		ws := exiterr.Sys().(syscall.WaitStatus)
-		fmt.Println("Command failed with exit code:", ws.ExitStatus())
+		debug.DEBUG("Command failed with exit code:", ws.ExitStatus())
 		os.Exit(int(ws.ExitStatus()))
 	} else {
-		fmt.Fprintln(os.Stderr, "Command failed:", err)
+		debug.DEBUG("Command failed:", err)
 		os.Exit(1)
 	}
 }
@@ -87,10 +89,10 @@ func runInNamespace() {
 
 	if exiterr, ok := err.(*exec.ExitError); ok {
 		ws := exiterr.Sys().(syscall.WaitStatus)
-		fmt.Println("Command failed with exit code:", ws.ExitStatus())
+		debug.DEBUG("Command failed with exit code:", ws.ExitStatus())
 		os.Exit(int(ws.ExitStatus()))
 	} else {
-		fmt.Fprintln(os.Stderr, "Command failed:", err)
+		debug.DEBUG("Command failed:", err)
 		os.Exit(1)
 	}
 }

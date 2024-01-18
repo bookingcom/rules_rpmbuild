@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"syscall"
 
+	"github.com/bookingcom/rules_rpmbuild/tools/debug"
 	"golang.org/x/sys/unix"
 )
 
@@ -36,7 +37,7 @@ func run() {
 
 	_, epoch := os.LookupEnv("SOURCE_DATE_EPOCH")
 	if epoch {
-		fmt.Fprintln(os.Stderr, "Propagating SOURCE_DATE_EPOCH:", os.Getenv("SOURCE_DATE_EPOCH"))
+		debug.DEBUG("Propagating SOURCE_DATE_EPOCH:", os.Getenv("SOURCE_DATE_EPOCH"))
 		cmd.Env = append(cmd.Env, "SOURCE_DATE_EPOCH=" + os.Getenv("SOURCE_DATE_EPOCH"))
 	}
 
@@ -67,7 +68,7 @@ func run() {
 		})
 	}
 
-	fmt.Fprintln(os.Stderr, "Starting command inside namespace")
+	debug.DEBUG("Starting command inside namespace")
 
 	err := cmd.Run()
 	if err == nil {
@@ -79,7 +80,7 @@ func run() {
 		fmt.Println("Command failed with exit code:", ws.ExitStatus())
 		os.Exit(int(ws.ExitStatus()))
 	}
-	fmt.Fprintln(os.Stderr, "Command failed:", err)
+	debug.DEBUG("Command failed:", err)
 	os.Exit(1)
 }
 
@@ -105,16 +106,16 @@ func mountDevFile(chroot string, filename string) {
 		fmt.Println("Failed to mount", filename, err)
 		os.Exit(1)
 	}
-	fmt.Fprintln(os.Stderr, "mounted in chroot", filename)
+	debug.DEBUG("mounted in chroot", filename)
 }
 
 func runInNamespace() {
-	fmt.Fprintln(os.Stderr, "Inside namespace")
+	debug.DEBUG("Inside namespace")
 	syscall.Sethostname([]byte("inside-container"))
 
 	chroot := os.Args[1]
 
-	fmt.Fprintln(os.Stderr, "mounting chroot")
+	debug.DEBUG("mounting chroot")
 	mountProc(chroot)
 
 	os.MkdirAll(chroot + "/dev", 0777)
@@ -122,14 +123,14 @@ func runInNamespace() {
 	mountDevFile(chroot, "/dev/random")
 	mountDevFile(chroot, "/dev/null")
 
-	fmt.Fprintln(os.Stderr, "syscall.chroot", chroot)
+	debug.DEBUG("syscall.chroot", chroot)
 	err := syscall.Chroot(chroot)
 	if err != nil {
 		fmt.Println("Failed to chroot:", err)
 		os.Exit(1)
 	}
 
-	fmt.Fprintln(os.Stderr, "syscall.chdir")
+	debug.DEBUG("syscall.chdir")
 	err = syscall.Chdir("/") // set the working directory inside container
 	if err != nil {
 		fmt.Println("Failed to chdir:", err)
@@ -141,7 +142,7 @@ func runInNamespace() {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	fmt.Fprintln(os.Stderr, "About to execute:", os.Args[2:])
+	debug.DEBUG("About to execute:", os.Args[2:])
 	err = cmd.Run()
 	exitStatus := 0
 
@@ -151,7 +152,7 @@ func runInNamespace() {
 			fmt.Println("Command failed with exit code:", ws.ExitStatus())
 			exitStatus = int(ws.ExitStatus())
 		} else {
-			fmt.Fprintln(os.Stderr, "Command failed:", err)
+			debug.DEBUG("Command failed:", err)
 			exitStatus = 1
 		}
 	}

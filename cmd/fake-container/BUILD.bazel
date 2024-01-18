@@ -5,7 +5,10 @@ go_library(
     srcs = ["main.go"],
     importpath = "github.com/bookingcom/rules_rpmbuild/cmd/fake-container",
     visibility = ["//visibility:private"],
-    deps = ["@org_golang_x_sys//unix"],
+    deps = [
+        "//tools/debug",
+        "@org_golang_x_sys//unix",
+    ],
 )
 
 go_binary(

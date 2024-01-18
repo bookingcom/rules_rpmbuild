@@ -5,6 +5,7 @@ go_library(
     srcs = ["main.go"],
     importpath = "github.com/bookingcom/rules_rpmbuild/cmd/fakeroot",
     visibility = ["//visibility:private"],
+    deps = ["//tools/debug"],
 )
 
 go_binary(
