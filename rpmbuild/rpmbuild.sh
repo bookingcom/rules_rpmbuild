@@ -83,7 +83,7 @@ fi
 
 ${FAKECONTAINER} ${RPMPATH} \
     ${RPM_INTERPRETER} ${RPMBUILD_BIN} \
-        --verbose --verbose -bb \
+        --verbose -bb \
         --dbpath=/var/lib/rpm \
         --define='source_date_epoch_from_changelog 1' \
         --define='use_source_date_epoch_as_buildtime 1' \
