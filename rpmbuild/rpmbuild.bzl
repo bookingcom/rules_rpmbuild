@@ -19,6 +19,11 @@ def _copy_rpms(ctx, path, files):
 def _rpmbuild_impl(ctx):
     out = ctx.actions.declare_directory("{}-output".format(ctx.label.name))
 
+    rpm_path = "/tmp/rpm-{}-{}".format(
+        ctx.label.package.replace("/", "-"),
+        ctx.label.name
+    )
+
     sources = []
     copy_sources = []
     for k, v in ctx.attr.sources.items():
@@ -30,10 +35,10 @@ def _rpmbuild_impl(ctx):
         sources.append(dst)
         if "/" in v:
             copy_sources.append(
-                "mkdir -p /tmp/rpm/rpmbuild/%s" % (v.rsplit("/", 1)[0])
+                "mkdir -p %s/rpmbuild/%s" % (rpm_path, v.rsplit("/", 1)[0])
             )
         copy_sources.append(
-            "cp %s /tmp/rpm/rpmbuild/%s" % (dst.path, v)
+            "cp %s %s/rpmbuild/%s" % (dst.path, rpm_path, v)
         )
 
     copy_files_script = ctx.actions.declare_file("%s-copy-files.sh" % ctx.label.name)
@@ -61,6 +66,7 @@ set -exuo pipefail
         "COPY_FILES": copy_files_script.path,
         "FILESYSTEM_RPMTREE": ctx.file.filesystem_rpmtree.path,
         "RPMBUILD_RPMTREE": ctx.file.rpmbuild_rpmtree.path,
+        "RPMPATH": rpm_path,
     })
 
     depset_direct = [copy_files_script] + \

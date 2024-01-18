@@ -2,9 +2,9 @@
 
 set -exuo pipefail
 
-if [ -d /tmp/rpm ]; then
-    chmod -R +w /tmp/rpm
-    rm -rf /tmp/rpm
+if [ -d ${RPMPATH} ]; then
+    chmod -R +w ${RPMPATH}
+    rm -rf ${RPMPATH}
 fi
 
 # Jan 1, 2001 00:00:00 UTC as epoch
@@ -18,43 +18,43 @@ export FAKECONTAINER=${CWD}/${FAKECONTAINER}
 export BSDTAR_BIN=${CWD}/${BSDTAR_BIN}
 export RPM_ARCHIVE=${CWD}/${RPM_ARCHIVE}
 
-mkdir -p /tmp/rpm/rpmbuild/rpmbuild
+mkdir -p ${RPMPATH}/rpmbuild/rpmbuild
 
-${FAKEROOT} mkdir -p /tmp/rpm/bin /tmp/rpm/lib64 /tmp/rpm/sbin /tmp/rpm/rpmbuild/usr/lib/rpm /tmp/rpm/usr/lib/rpm
+${FAKEROOT} mkdir -p ${RPMPATH}/bin ${RPMPATH}/lib64 ${RPMPATH}/sbin ${RPMPATH}/rpmbuild/usr/lib/rpm ${RPMPATH}/usr/lib/rpm
 
 # base system + rpmbuild
-${FAKEROOT} ${BSDTAR_BIN} -xkmf ${FILESYSTEM_RPMTREE} -C /tmp/rpm
-${FAKEROOT} ${BSDTAR_BIN} -xkmf ${RPMBUILD_RPMTREE} -C /tmp/rpm
+${FAKEROOT} ${BSDTAR_BIN} -xkmf ${FILESYSTEM_RPMTREE} -C ${RPMPATH}
+${FAKEROOT} ${BSDTAR_BIN} -xkmf ${RPMBUILD_RPMTREE} -C ${RPMPATH}
 
 # portable rpm
-${FAKEROOT} ${BSDTAR_BIN} -xkmf ${RPM_ARCHIVE} -C /tmp/rpm
+${FAKEROOT} ${BSDTAR_BIN} -xkmf ${RPM_ARCHIVE} -C ${RPMPATH}
 
 # build dependencies
 if [ -n "${DEPS_RPMS:-}" ]; then
-    ${FAKEROOT} ${BSDTAR_BIN} -xkmf ${DEPS_RPMTREE} -C /tmp/rpm
+    ${FAKEROOT} ${BSDTAR_BIN} -xkmf ${DEPS_RPMTREE} -C ${RPMPATH}
 fi
 
 # fix some paths
 for i in bin lib64 sbin ; do
-    find /tmp/rpm/${i}/ -mindepth 1 -maxdepth 1 -exec ${FAKEROOT} mv {} /tmp/rpm/usr/${i} \;
-    ${FAKEROOT} rmdir /tmp/rpm/${i}
-    ${FAKEROOT} bash -c "cd /tmp/rpm && ln -s usr/${i} ."
+    find ${RPMPATH}/${i}/ -mindepth 1 -maxdepth 1 -exec ${FAKEROOT} mv {} ${RPMPATH}/usr/${i} \;
+    ${FAKEROOT} rmdir ${RPMPATH}/${i}
+    ${FAKEROOT} bash -c "cd ${RPMPATH} && ln -s usr/${i} ."
 done
 
-if grep -q -F "__perl_provides" /tmp/rpm/etc/rpm/macros.perl ; then
-    ${FAKEROOT} sed -i '/__perl_provides/d' /tmp/rpm/etc/rpm/macros.perl
-    ${FAKEROOT} sed -i '/__perl_requires/d' /tmp/rpm/etc/rpm/macros.perl
+if grep -q -F "__perl_provides" ${RPMPATH}/etc/rpm/macros.perl ; then
+    ${FAKEROOT} sed -i '/__perl_provides/d' ${RPMPATH}/etc/rpm/macros.perl
+    ${FAKEROOT} sed -i '/__perl_requires/d' ${RPMPATH}/etc/rpm/macros.perl
 fi
 
 ${FAKEROOT} \
-    /tmp/rpm/${RPM_INTERPRETER} \
-        /tmp/rpm/${RPM_PREFIX}/usr/bin/rpmdb \
+    ${RPMPATH}/${RPM_INTERPRETER} \
+        ${RPMPATH}/${RPM_PREFIX}/usr/bin/rpmdb \
         --initdb \
-        --root=/tmp/rpm \
+        --root=${RPMPATH} \
         --dbpath=/var/lib/rpm \
         --verbose
 
-${FAKEROOT} mkdir -p /tmp/rpm/var/lib/rpm
+${FAKEROOT} mkdir -p ${RPMPATH}/var/lib/rpm
 
 RPMS="${CWD}/${FILESYSTEM_RPMS}/*.rpm ${CWD}/${RPMBUILD_RPMS}/*.rpm"
 
@@ -63,25 +63,25 @@ if [ -n "${DEPS_RPMS:-}" ]; then
 fi
 
 ${FAKEROOT} \
-    /tmp/rpm/${RPM_INTERPRETER} /tmp/rpm/${RPM_BIN} \
+    ${RPMPATH}/${RPM_INTERPRETER} ${RPMPATH}/${RPM_BIN} \
         --install \
-        --rcfile=/tmp/rpm/${RPM_RC} \
-        --root=/tmp/rpm \
+        --rcfile=${RPMPATH}/${RPM_RC} \
+        --root=${RPMPATH} \
         --dbpath=/var/lib/rpm \
         --justdb \
         --verbose \
         ${FLAGS} \
         ${RPMS}
 
-cp ${SPEC} /tmp/rpm/rpmbuild
+cp ${SPEC} ${RPMPATH}/rpmbuild
 
 ${FAKEROOT} ${CWD}/${COPY_FILES}
 
-if [ ! -f /tmp/rpm/usr/bin/ld ] && [ -f /tmp/rpm/usr/bin/ld.gold ]; then
-    (cd /tmp/rpm/usr/bin ; ${FAKEROOT} ln -s ld.gold ld)
+if [ ! -f ${RPMPATH}/usr/bin/ld ] && [ -f ${RPMPATH}/usr/bin/ld.gold ]; then
+    (cd ${RPMPATH}/usr/bin ; ${FAKEROOT} ln -s ld.gold ld)
 fi
 
-${FAKECONTAINER} /tmp/rpm \
+${FAKECONTAINER} ${RPMPATH} \
     ${RPM_INTERPRETER} ${RPMBUILD_BIN} \
         --verbose --verbose -bb \
         --dbpath=/var/lib/rpm \
@@ -93,4 +93,4 @@ ${FAKECONTAINER} /tmp/rpm \
         /rpmbuild/${SPEC_BASENAME}
 
 mkdir -p {output}
-exec cp $(find /tmp/rpm/rpmbuild/RPMS -type f) ${OUTPUT}
+exec cp $(find ${RPMPATH}/rpmbuild/RPMS -type f) ${OUTPUT}
