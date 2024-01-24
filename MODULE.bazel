@@ -25,13 +25,24 @@ bazel_dep(name = "gazelle", version = "0.35.0")
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.5.0", dev_dependency = True)
 
 bazel_dep(name = "bazeldnf", version = "0.6.0")
-bazel_dep(name = "aspect_bazel_lib", version = "2.1.0")
 
-BAZELDNF_COMMIT = "8e110d32399ab1c3db08e18f015b3e7e092a27de"
+ASPECT_BAZEL_LIB_COMMIT = "5e369bea01691b80dfa1338fe44bc704c31105d9"
+bazel_dep(name = "aspect_bazel_lib", version = "2.3.0")
+archive_override(
+    module_name = "aspect_bazel_lib",
+    strip_prefix = "bazel-lib-%s" % ASPECT_BAZEL_LIB_COMMIT,
+    integrity = "sha256-M5Pc7QKgw157lrCvJJC2LscfdfRTDhNU1mNmmig97xY=",
+    urls = [
+        "https://jfrog.booking.com/artifactory/github-release-mirror/bookingcom/bazel-lib/archive/%s.tar.gz" % ASPECT_BAZEL_LIB_COMMIT,
+        "https://github.com/bookingcom/bazel-lib/archive/%s.tar.gz" % ASPECT_BAZEL_LIB_COMMIT,
+    ]
+)
+
+BAZELDNF_COMMIT = "1f927b5c5153e6098cb438259e352df24a0bd9c9"
 
 archive_override(
     module_name = "bazeldnf",
-    integrity = "sha256-x1+AOKCknpmFjGfdPJ5cR6+lhjjKX0zh5vlVn2YYHuM=",
+    integrity = "sha256-2m27r6+ejOS7i+iZuUoXfjU+cE3W8AImokgcvPKzC3c=",
     strip_prefix = "bazeldnf-%s" % BAZELDNF_COMMIT,
     urls = [
         "https://github.com/bookingcom/bazeldnf/archive/%s.tar.gz" % BAZELDNF_COMMIT,
