@@ -19,10 +19,13 @@ def _copy_rpms(ctx, path, files):
 def _rpmbuild_impl(ctx):
     out = ctx.actions.declare_directory("{}-output".format(ctx.label.name))
 
-    rpm_path = "/tmp/rpm-{}-{}".format(
-        ctx.label.package.replace("/", "-"),
-        ctx.label.name
-    )
+    name = ctx.label.name
+
+    rpm_path = "/tmp/rpm-"
+    if ctx.label.package:
+        rpm_path = "%s%s-" % (rpm_path, ctx.label.package.replace("/", "-"))
+
+    rpm_path = "{}{}".format(rpm_path, ctx.label.name)
 
     sources = []
     copy_sources = []

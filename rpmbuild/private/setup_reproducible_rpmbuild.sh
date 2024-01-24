@@ -43,7 +43,7 @@ patch_binary usr/bin/rpmdb
 patch_binary usr/bin/rpmbuild
 
 for file in $(find usr/lib64); do
-    if file "${file}" | grep -i elf | grep -i -q 'dynamically linked' ; then
+    if file "${file}" | grep -i elf | grep -v ld-linux- | grep -i -q 'dynamically linked' ; then
         ${CWD}/${FAKEROOT} ${CWD}/${PATCHELF_BIN} --set-rpath \$ORIGIN "${file}"
         ${CWD}/${FAKEROOT} ${CWD}/${PATCHELF_BIN} --add-rpath \$ORIGIN/../lib "${file}"
     fi

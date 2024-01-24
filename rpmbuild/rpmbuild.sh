@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -exuo pipefail
+set -euo pipefail
 
 if [ -d ${RPMPATH} ]; then
     chmod -R +w ${RPMPATH}
@@ -44,13 +44,15 @@ done
 if grep -q -F "__perl_provides" ${RPMPATH}/etc/rpm/macros.perl ; then
     ${FAKEROOT} sed -i '/__perl_provides/d' ${RPMPATH}/etc/rpm/macros.perl
     ${FAKEROOT} sed -i '/__perl_requires/d' ${RPMPATH}/etc/rpm/macros.perl
+    ${FAKEROOT} sed -i '/redhat_kernel_module_package/d' ${RPMPATH}/usr/lib/rpm/redhat/macros
+    ${FAKEROOT} sed -i '/kernel_module_package_release/d' ${RPMPATH}/usr/lib/rpm/redhat/macros
 fi
 
-${FAKEROOT} \
-    ${RPMPATH}/${RPM_INTERPRETER} \
-        ${RPMPATH}/${RPM_PREFIX}/usr/bin/rpmdb \
+echo %_db_backend sqlite | ${FAKEROOT} tee ${RPMPATH}/etc/rpm/macros.db
+
+${FAKECONTAINER} ${RPMPATH} \
+    ${RPM_INTERPRETER} ${RPM_PREFIX}/usr/bin/rpmdb \
         --initdb \
-        --root=${RPMPATH} \
         --dbpath=/var/lib/rpm \
         --verbose
 
@@ -62,16 +64,19 @@ if [ -n "${DEPS_RPMS:-}" ]; then
     RPMS="${RPMS} ${CWD}/${DEPS_RPMS:-}/*.rpm"
 fi
 
-${FAKEROOT} \
-    ${RPMPATH}/${RPM_INTERPRETER} ${RPMPATH}/${RPM_BIN} \
+${FAKEROOT} mkdir -p ${RPMPATH}/tmp/rpms
+${FAKEROOT} cp ${RPMS} ${RPMPATH}/tmp/rpms
+
+${FAKECONTAINER} ${RPMPATH} \
+    ${RPM_INTERPRETER} ${RPM_BIN} \
         --install \
-        --rcfile=${RPMPATH}/${RPM_RC} \
-        --root=${RPMPATH} \
+        --rcfile=${RPM_RC} \
         --dbpath=/var/lib/rpm \
         --justdb \
+        --nosignature \
         --verbose \
         ${FLAGS} \
-        ${RPMS}
+        '/tmp/rpms/*'
 
 cp ${SPEC} ${RPMPATH}/rpmbuild
 
